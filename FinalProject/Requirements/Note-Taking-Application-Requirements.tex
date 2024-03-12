@@ -1,6 +1,13 @@
 \documentclass[]{article}
 \usepackage{graphicx}
 \graphicspath{ {./images/} }
+\usepackage{hyperref}
+
+\hypersetup{
+	colorlinks=true,
+	linkcolor=blue,     
+	urlcolor=blue
+}
 
 %opening
 \title{CSCI 470 - Note-taking application requirements}
@@ -9,6 +16,12 @@
 \begin{document}
 	
 	\maketitle
+	
+	\pagebreak
+	
+	\tableofcontents
+	
+	\listoffigures
 	
 	\pagebreak
 	
@@ -49,6 +62,8 @@
 	
 	\section{Design}
 	
+	\subsection{Sketches on paper}
+	
 	Here is a first sketch of the different pages of the app, and the transitions between them:
 	
 	\begin{figure}[!htb]
@@ -69,4 +84,35 @@
 	
 	All pages can be accessed by clicking on a specific element, as the arrows on the sketches show.
 	
+	\pagebreak
+	
+	\subsection{Prototyping on Figma}
+	
+	After drawing my first sketches on paper, I started making a more accurate and clean design of the UI on Figma, and I used its prototyping features to create the transitions between the pages of the app.
+	
+	As Flutter uses the Google Material's design, I used their official figma template, which contains reusable Material component, so my Figma design could be as close as possible as the UI the final app will have.
+	
+	You can access my figma design \href{https://www.figma.com/file/ZOlxVGHb9fLdk5uUODqMU9/CSCI-337---Notes-Taking-App?type=design&node-id=54810%3A34721&mode=design&t=fS6KJvRgsvtgz9cf-1}{here}.
+	
+	I started by making the User Story "Create a class"
+	
+		\begin{figure}[!htb]
+		\centering
+		\includegraphics[scale=0.3]{figma_user_story_create_class}
+		\caption{User story "Create Class" on Figma}
+	\end{figure}
+	
+	From the home page that contains the list of our classes, a button lets the user create a class by giving it a name. It is then immediately available from the home page.
+	
+	\section{Links}
+	
+	Here are the links to important resources:
+	
+	\begin{itemize}
+		\item \href{https://github.com/Logan-Developer/ui-lahumbert/tree/main/FinalProject}{Project's repository} 
+		
+		\item \href{https://www.figma.com/file/ZOlxVGHb9fLdk5uUODqMU9/CSCI-337---Notes-Taking-App?type=design&node-id=54810%3A34721&mode=design&t=fS6KJvRgsvtgz9cf-1}{Figma Design}
+	\end{itemize}
+	
+	\label{LastPage}
 \end{document}
