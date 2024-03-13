@@ -35,47 +35,49 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: Text(widget.title),
-      ),
-      body: Center(
-          child: Column(children: [
-        MySearchWidget(
-            hintText: 'Search your classes',
-            searchValueCallback: (value) => setState(() {
-                  searchValue = value;
-                })),
-        Expanded(
-            child: Container(
-                padding: const EdgeInsets.all(100),
-                child: ListView.separated(
-                    separatorBuilder: (BuildContext context, int index) =>
-                        const SizedBox(height: 10),
-                    itemCount: classes.length,
-                    itemBuilder: (BuildContext context, int index) {
-                      final className = classes[index];
-                      if (searchValue.isNotEmpty &&
-                          !className.contains(searchValue)) {
-                        return const SizedBox.shrink();
-                      }
-                      return Card(
-                        child: Column(children: [
-                          ListTile(
-                            title: Text(classes[index]),
-                            subtitle: const Text('Last changed DATE'),
-                          )
-                        ]),
-                      );
-                    }))),
-      ])),
-      floatingActionButton: FloatingActionButton.extended(
-        onPressed: () {
-          context.go('/create-class');
-        },
-        label: const Text('Add Class'),
-        icon: const Icon(Icons.add),
-      ),
-    );
+        appBar: AppBar(
+          backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+          title: Text(widget.title),
+        ),
+        body: Center(
+            child: Column(children: [
+          MySearchWidget(
+              hintText: 'Search your classes',
+              searchValueCallback: (value) => setState(() {
+                    searchValue = value;
+                  })),
+          Expanded(
+              child: Container(
+                  padding: const EdgeInsets.all(100),
+                  child: ListView.separated(
+                      separatorBuilder: (BuildContext context, int index) =>
+                          const SizedBox(height: 10),
+                      itemCount: classes.length,
+                      itemBuilder: (BuildContext context, int index) {
+                        final className = classes[index];
+                        if (searchValue.isNotEmpty &&
+                            !className.contains(searchValue)) {
+                          return const SizedBox.shrink();
+                        }
+                        return GestureDetector(
+                            onTap: () {
+                              context.go('/notes-list/$className');
+                            },
+                            child: Card(
+                                child: Column(children: [
+                              ListTile(
+                                title: Text(className),
+                                subtitle: const Text('Last changed DATE'),
+                              ),
+                            ])));
+                      }))),
+        ])),
+        floatingActionButton: FloatingActionButton.extended(
+          onPressed: () {
+            context.go('/create-class');
+          },
+          label: const Text('Add Class'),
+          icon: const Icon(Icons.add),
+        ));
   }
 }

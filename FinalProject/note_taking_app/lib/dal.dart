@@ -35,6 +35,14 @@ class DAL {
           id INTEGER PRIMARY KEY,
           name TEXT
         )
-        ''');
+      ''');
+    await db.execute('''
+        CREATE TABLE notes (
+          id INTEGER PRIMARY KEY,
+          class TEXT NOT NULL,
+          note TEXT,
+          FOREIGN KEY (class) REFERENCES classes (name)
+        )
+      ''');
   }
 }

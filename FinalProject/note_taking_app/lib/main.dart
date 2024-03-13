@@ -5,6 +5,7 @@ import 'package:provider/provider.dart';
 import 'pages/create_class_page.dart';
 import 'pages/home_page.dart';
 import 'data_repository.dart';
+import 'pages/notes_list_page.dart';
 
 void main() {
   runApp(Provider(create: (context) => DataRepository(), child: MyApp()));
@@ -13,20 +14,26 @@ void main() {
 class MyApp extends StatelessWidget {
   MyApp({super.key});
 
-  final _router = GoRouter(
-    routes: [
-      GoRoute(
-        path: '/',
-        builder: (context, state) =>
-            const HomePage(title: 'My Note-Taking App'),
-      ),
-      GoRoute(
-          path: '/create-class',
-          builder: (context, state) {
-            return const CreateClassPage(title: 'Create a new class');
-          }),
-    ],
-  );
+  final _router = GoRouter(routes: [
+    GoRoute(
+      path: '/',
+      builder: (context, state) => const HomePage(title: 'My Note-Taking App'),
+    ),
+    GoRoute(
+        path: '/notes-list/:className',
+        builder: (context, state) {
+          final className = state.pathParameters['className'];
+          if (className == null) {
+            return const SizedBox.shrink();
+          }
+          return NotesListPage(title: className, className: className);
+        }),
+    GoRoute(
+      path: '/create-class',
+      builder: (context, state) =>
+          const CreateClassPage(title: 'Create a class'),
+    ),
+  ]);
 
   @override
   Widget build(BuildContext context) {
