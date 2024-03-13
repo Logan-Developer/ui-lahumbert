@@ -16,6 +16,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   List<String> classes = [];
+  String searchValue = '';
 
   @override
   void initState() {
@@ -42,7 +43,9 @@ class _HomePageState extends State<HomePage> {
           child: Column(children: [
         MySearchWidget(
             hintText: 'Search your classes',
-            searchValueCallback: (value) => {}),
+            searchValueCallback: (value) => setState(() {
+                  searchValue = value;
+                })),
         Expanded(
             child: Container(
                 padding: const EdgeInsets.all(100),
@@ -51,6 +54,11 @@ class _HomePageState extends State<HomePage> {
                         const SizedBox(height: 10),
                     itemCount: classes.length,
                     itemBuilder: (BuildContext context, int index) {
+                      final className = classes[index];
+                      if (searchValue.isNotEmpty &&
+                          !className.contains(searchValue)) {
+                        return const SizedBox.shrink();
+                      }
                       return Card(
                         child: Column(children: [
                           ListTile(
