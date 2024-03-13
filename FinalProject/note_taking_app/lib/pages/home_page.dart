@@ -19,9 +19,36 @@ class _HomePageState extends State<HomePage> {
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
         title: Text(widget.title),
       ),
-      body: const Center(
-          child: Column(
-              children: [MySearchWidget(hintText: 'Search your classes')])),
+      body: Center(
+          child: Column(children: [
+        MySearchWidget(
+            hintText: 'Search your classes',
+            searchValueCallback: (value) => {}),
+        Expanded(
+            child: Container(
+                padding: const EdgeInsets.all(100),
+                child: ListView.separated(
+                    separatorBuilder: (BuildContext context, int index) =>
+                        const SizedBox(height: 10),
+                    itemCount: 10,
+                    itemBuilder: (BuildContext context, int index) {
+                      return Card(
+                        child: Column(children: [
+                          ListTile(
+                            title: Text('Class $index'),
+                            subtitle: const Text('Last changed DATE'),
+                          )
+                        ]),
+                      );
+                    }))),
+      ])),
+      floatingActionButton: FloatingActionButton.extended(
+        onPressed: () {
+          // TODO: Add fab action
+        },
+        label: const Text('Add Class'),
+        icon: const Icon(Icons.add),
+      ),
     );
   }
 }
