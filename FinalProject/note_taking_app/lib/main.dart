@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
+import 'pages/create_class_page.dart';
 import 'pages/home_page.dart';
 import 'data_repository.dart';
 
@@ -19,6 +20,11 @@ class MyApp extends StatelessWidget {
         builder: (context, state) =>
             const HomePage(title: 'My Note-Taking App'),
       ),
+      GoRoute(
+          path: '/create-class',
+          builder: (context, state) {
+            return const CreateClassPage(title: 'Create a new class');
+          }),
     ],
   );
 

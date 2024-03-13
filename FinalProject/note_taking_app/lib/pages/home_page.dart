@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
 import '../data_repository.dart';
@@ -62,7 +63,7 @@ class _HomePageState extends State<HomePage> {
       ])),
       floatingActionButton: FloatingActionButton.extended(
         onPressed: () {
-          // TODO: Add fab action
+          context.go('/create-class');
         },
         label: const Text('Add Class'),
         icon: const Icon(Icons.add),
