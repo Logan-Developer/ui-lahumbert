@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../widgets/my_search_widget.dart';
+
 class HomePage extends StatefulWidget {
   const HomePage({super.key, required this.title});
 
@@ -17,6 +19,9 @@ class _HomePageState extends State<HomePage> {
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
         title: Text(widget.title),
       ),
+      body: const Center(
+          child: Column(
+              children: [MySearchWidget(hintText: 'Search your classes')])),
     );
   }
 }
