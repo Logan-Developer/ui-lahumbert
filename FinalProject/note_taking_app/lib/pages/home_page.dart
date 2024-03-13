@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
+import '../data_repository.dart';
 import '../widgets/my_search_widget.dart';
 
 class HomePage extends StatefulWidget {
@@ -12,6 +14,22 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  List<String> classes = [];
+
+  @override
+  void initState() {
+    super.initState();
+    loadClasses();
+  }
+
+  Future<void> loadClasses() async {
+    final repository = Provider.of<DataRepository>(context, listen: false);
+    final classes = await repository.fetchClasses();
+    setState(() {
+      this.classes = classes;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -30,12 +48,12 @@ class _HomePageState extends State<HomePage> {
                 child: ListView.separated(
                     separatorBuilder: (BuildContext context, int index) =>
                         const SizedBox(height: 10),
-                    itemCount: 10,
+                    itemCount: classes.length,
                     itemBuilder: (BuildContext context, int index) {
                       return Card(
                         child: Column(children: [
                           ListTile(
-                            title: Text('Class $index'),
+                            title: Text(classes[index]),
                             subtitle: const Text('Last changed DATE'),
                           )
                         ]),
