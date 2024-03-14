@@ -73,7 +73,7 @@ class _NotesListPageState extends State<NotesListPage> {
       ])),
       floatingActionButton: FloatingActionButton.extended(
         onPressed: () {
-          context.go('/create-note');
+          context.go('/notes-list/${widget.className}/create-note');
         },
         label: const Text('Add Note'),
         icon: const Icon(Icons.add),

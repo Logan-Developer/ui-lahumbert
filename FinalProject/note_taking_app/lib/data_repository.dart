@@ -12,11 +12,18 @@ class DataRepository {
     final db = await dal.db;
     final notes =
         await db.query('notes', where: 'class = ?', whereArgs: [className]);
-    return notes.map((e) => e['note'] as String).toList();
+    return notes.map((e) => e['name'] as String).toList();
   }
 
   Future<void> addClass(String className) async {
     final db = await dal.db;
     await db.insert('classes', {'name': className});
+  }
+
+  Future<void> addNote(
+      String className, String noteName, String content) async {
+    final db = await dal.db;
+    await db.insert(
+        'notes', {'class': className, 'name': noteName, 'content': content});
   }
 }

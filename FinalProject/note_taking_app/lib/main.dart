@@ -3,6 +3,7 @@ import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
 import 'pages/create_class_page.dart';
+import 'pages/create_note_page.dart';
 import 'pages/home_page.dart';
 import 'data_repository.dart';
 import 'pages/notes_list_page.dart';
@@ -27,7 +28,19 @@ class MyApp extends StatelessWidget {
             return const SizedBox.shrink();
           }
           return NotesListPage(title: className, className: className);
-        }),
+        },
+        routes: [
+          GoRoute(
+              path: 'create-note',
+              builder: (context, state) {
+                final className = state.pathParameters['className'];
+                if (className == null) {
+                  return const SizedBox.shrink();
+                }
+                return CreateNotePage(
+                    title: 'Create a note', className: className);
+              }),
+        ]),
     GoRoute(
       path: '/create-class',
       builder: (context, state) =>

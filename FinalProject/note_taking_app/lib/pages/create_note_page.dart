@@ -4,35 +4,39 @@ import 'package:provider/provider.dart';
 
 import '../data_repository.dart';
 
-class CreateClassPage extends StatefulWidget {
-  const CreateClassPage({super.key, required this.title});
+class CreateNotePage extends StatefulWidget {
+  const CreateNotePage(
+      {super.key, required this.title, required this.className});
 
   final String title;
+  final String className;
 
   @override
-  State<CreateClassPage> createState() => _CreateClassPageState();
+  State<CreateNotePage> createState() => _CreateNotePageState();
 }
 
-class _CreateClassPageState extends State<CreateClassPage> {
-  String className = '';
+class _CreateNotePageState extends State<CreateNotePage> {
+  String noteName = '', content = '';
 
-  late TextEditingController _controller;
+  late TextEditingController _noteNameController, _contentController;
 
   @override
   void initState() {
     super.initState();
-    _controller = TextEditingController();
+    _noteNameController = TextEditingController();
+    _contentController = TextEditingController();
   }
 
   @override
   void dispose() {
-    _controller.dispose();
+    _noteNameController.dispose();
+    _contentController.dispose();
     super.dispose();
   }
 
-  Future<void> createClass() async {
+  Future<void> createNote() async {
     final repository = Provider.of<DataRepository>(context, listen: false);
-    await repository.addClass(className);
+    await repository.addNote(widget.className, noteName, content);
   }
 
   @override
@@ -46,28 +50,39 @@ class _CreateClassPageState extends State<CreateClassPage> {
             child: Column(children: [
           const SizedBox(height: 20),
           TextField(
-            controller: _controller,
+            controller: _noteNameController,
             decoration: const InputDecoration(
               border: OutlineInputBorder(),
-              labelText: 'Class name',
+              labelText: 'Note name',
             ),
             onChanged: (value) => setState(() {
-              className = value;
+              noteName = value;
             }),
           ),
           const SizedBox(height: 20),
+          TextField(
+            controller: _contentController,
+            decoration: const InputDecoration(
+              border: OutlineInputBorder(),
+              labelText: 'Content',
+            ),
+            maxLines: 10,
+            onChanged: (value) => setState(() {
+              content = value;
+            }),
+          ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               OutlinedButton(
                   onPressed: () {
-                    context.go('/');
+                    context.go('/notes-list/${widget.className}');
                   },
                   child: const Text('Cancel')),
               ElevatedButton(
                 onPressed: () {
-                  createClass();
-                  context.go('/'); // fix data not updating on home page
+                  createNote();
+                  context.go('/notes-list/${widget.className}');
                 },
                 child: const Text('Create'),
               )

@@ -33,14 +33,15 @@ class DAL {
     await db.execute('''
         CREATE TABLE classes (
           id INTEGER PRIMARY KEY,
-          name TEXT
+          name TEXT NOT NULL
         )
       ''');
     await db.execute('''
         CREATE TABLE notes (
           id INTEGER PRIMARY KEY,
           class TEXT NOT NULL,
-          note TEXT,
+          name TEXT NOT NULL,
+          content TEXT,
           FOREIGN KEY (class) REFERENCES classes (name)
         )
       ''');
