@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
+import '../data_repository.dart';
 
 class NoteDetails extends StatefulWidget {
   const NoteDetails(
@@ -16,6 +19,22 @@ class NoteDetails extends StatefulWidget {
 }
 
 class _NoteDetailsState extends State<NoteDetails> {
+  String _noteContent = '';
+
+  @override
+  void initState() {
+    super.initState();
+    fetchNote();
+  }
+
+  Future<void> fetchNote() async {
+    final repository = Provider.of<DataRepository>(context, listen: false);
+    final note = await repository.fetchNote(widget.className, widget.noteName);
+    setState(() {
+      _noteContent = note['content'] as String;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -23,13 +42,15 @@ class _NoteDetailsState extends State<NoteDetails> {
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
         title: Text(widget.title),
       ),
-      body: Center(
+      body: Container(
+        padding: const EdgeInsets.all(20),
         child: Column(
           children: [
-            const SizedBox(height: 20),
-            Text(widget.noteName),
-            const SizedBox(height: 20),
-            const Text('Note content'),
+            Expanded(
+              child: SingleChildScrollView(
+                child: Text(_noteContent),
+              ),
+            ),
           ],
         ),
       ),

@@ -15,6 +15,14 @@ class DataRepository {
     return notes.map((e) => e['name'] as String).toList();
   }
 
+  Future<Map<String, dynamic>> fetchNote(
+      String className, String noteName) async {
+    final db = await dal.db;
+    final notes = await db.query('notes',
+        where: 'class = ? AND name = ?', whereArgs: [className, noteName]);
+    return notes.first;
+  }
+
   Future<void> addClass(String className) async {
     final db = await dal.db;
     await db.insert('classes', {'name': className});

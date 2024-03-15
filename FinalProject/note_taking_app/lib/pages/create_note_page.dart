@@ -76,13 +76,13 @@ class _CreateNotePageState extends State<CreateNotePage> {
             children: [
               OutlinedButton(
                   onPressed: () {
-                    context.go('/notes-list/${widget.className}');
+                    context.go('/class/${widget.className}');
                   },
                   child: const Text('Cancel')),
               ElevatedButton(
                 onPressed: () {
                   createNote();
-                  context.go('/notes-list/${widget.className}');
+                  context.go('/class/${widget.className}');
                 },
                 child: const Text('Create'),
               )

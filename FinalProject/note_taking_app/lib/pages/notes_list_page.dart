@@ -101,14 +101,18 @@ class _NotesListPageState extends State<NotesListPage> {
                           !className.contains(searchValue)) {
                         return const SizedBox.shrink();
                       }
-                      return Card(
-                        child: Column(children: [
-                          ListTile(
-                            title: Text(notes[index]),
-                            subtitle: const Text('Last changed DATE'),
-                          )
-                        ]),
-                      );
+                      return GestureDetector(
+                          onTap: () {
+                            context.go('/class/${widget.className}/$className');
+                          },
+                          child: Card(
+                            child: Column(children: [
+                              ListTile(
+                                title: Text(notes[index]),
+                                subtitle: const Text('Last changed DATE'),
+                              )
+                            ]),
+                          ));
                     }))),
       ])),
       floatingActionButton: FloatingActionButton.extended(

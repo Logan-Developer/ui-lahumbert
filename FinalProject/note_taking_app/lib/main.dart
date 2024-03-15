@@ -6,6 +6,7 @@ import 'pages/create_class_page.dart';
 import 'pages/create_note_page.dart';
 import 'pages/home_page.dart';
 import 'data_repository.dart';
+import 'pages/note_details.dart';
 import 'pages/notes_list_page.dart';
 
 void main() {
@@ -51,6 +52,17 @@ class MyApp extends StatelessWidget {
                 return CreateNotePage(
                     title: 'Create a note', className: className);
               }),
+          GoRoute(
+              path: ':noteName',
+              builder: (context, state) {
+                final className = state.pathParameters['className'];
+                final noteName = state.pathParameters['noteName'];
+                if (className == null || noteName == null) {
+                  return const SizedBox.shrink();
+                }
+                return NoteDetails(
+                    title: noteName, className: className, noteName: noteName);
+              })
         ]),
     GoRoute(
       path: '/create-class',
