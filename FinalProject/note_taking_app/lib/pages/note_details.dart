@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
 import '../data_repository.dart';
@@ -35,12 +36,47 @@ class _NoteDetailsState extends State<NoteDetails> {
     });
   }
 
+  Future<void> deleteNote() async {
+    final repository = Provider.of<DataRepository>(context, listen: false);
+    await repository.deleteNote(widget.className, widget.noteName);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
         title: Text(widget.title),
+        actions: [
+          IconButton(
+              onPressed: () {
+                // display a dialog to confirm the deletion
+                showDialog(
+                    context: context,
+                    builder: (BuildContext context) {
+                      return AlertDialog(
+                        title: const Text('Delete note'),
+                        content: const Text(
+                            'Are you sure you want to delete this note?'),
+                        actions: [
+                          TextButton(
+                              onPressed: () {
+                                Navigator.of(context).pop();
+                              },
+                              child: const Text('Cancel')),
+                          TextButton(
+                              onPressed: () async {
+                                await deleteNote().then((value) =>
+                                    context.go('/class/${widget.className}'));
+                              },
+                              child: const Text('Delete')),
+                        ],
+                      );
+                    });
+              },
+              icon: const Icon(Icons.delete),
+              tooltip: 'Delete note'),
+        ],
       ),
       body: Container(
         padding: const EdgeInsets.all(20),
