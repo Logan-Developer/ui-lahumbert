@@ -21,7 +21,7 @@ class MyApp extends StatelessWidget {
       builder: (context, state) => const HomePage(title: 'My Note-Taking App'),
     ),
     GoRoute(
-        path: '/notes-list/:className',
+        path: '/class/:className',
         builder: (context, state) {
           final className = state.pathParameters['className'];
           if (className == null) {
@@ -30,6 +30,17 @@ class MyApp extends StatelessWidget {
           return NotesListPage(title: className, className: className);
         },
         routes: [
+          GoRoute(
+              path: 'edit',
+              builder: (context, state) {
+                final className = state.pathParameters['className'];
+                if (className == null) {
+                  return const SizedBox.shrink();
+                }
+                return CreateClassPage(
+                    title: 'Edit class $className',
+                    currentClassName: className);
+              }),
           GoRoute(
               path: 'create-note',
               builder: (context, state) {
@@ -45,17 +56,7 @@ class MyApp extends StatelessWidget {
       path: '/create-class',
       builder: (context, state) =>
           const CreateClassPage(title: 'Create a class'),
-    ),
-    GoRoute(
-        path: '/edit-class/:className',
-        builder: (context, state) {
-          final className = state.pathParameters['className'];
-          if (className == null) {
-            return const SizedBox.shrink();
-          }
-          return CreateClassPage(
-              title: 'Edit class $className', currentClassName: className);
-        }),
+    )
   ]);
 
   @override

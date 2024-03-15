@@ -60,7 +60,7 @@ class _HomePageState extends State<HomePage> {
                         }
                         return GestureDetector(
                             onTap: () {
-                              context.go('/notes-list/$className');
+                              context.go('/class/$className');
                             },
                             child: Card(
                                 child: Column(children: [

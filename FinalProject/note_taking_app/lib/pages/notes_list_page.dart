@@ -48,7 +48,7 @@ class _NotesListPageState extends State<NotesListPage> {
         actions: [
           IconButton(
               onPressed: () {
-                context.go('/edit-class/${widget.className}');
+                context.go('/class/${widget.className}/edit');
               },
               icon: const Icon(Icons.edit),
               tooltip: 'Edit class'),
@@ -113,7 +113,7 @@ class _NotesListPageState extends State<NotesListPage> {
       ])),
       floatingActionButton: FloatingActionButton.extended(
         onPressed: () {
-          context.go('/notes-list/${widget.className}/create-note');
+          context.go('/class/${widget.className}/create-note');
         },
         label: const Text('Add Note'),
         icon: const Icon(Icons.add),
