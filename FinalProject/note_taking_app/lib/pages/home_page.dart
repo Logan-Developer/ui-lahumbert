@@ -36,9 +36,8 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-          title: Text(widget.title),
-        ),
+            backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+            title: Text(widget.title)),
         body: Center(
             child: Column(children: [
           MySearchWidget(
@@ -61,7 +60,7 @@ class _HomePageState extends State<HomePage> {
                         }
                         return GestureDetector(
                             onTap: () {
-                              context.push('/notes-list/$className');
+                              context.go('/notes-list/$className');
                             },
                             child: Card(
                                 child: Column(children: [

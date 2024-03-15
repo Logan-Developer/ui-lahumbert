@@ -26,4 +26,10 @@ class DataRepository {
     await db.insert(
         'notes', {'class': className, 'name': noteName, 'content': content});
   }
+
+  Future<void> deleteClass(String className) async {
+    final db = await dal.db;
+    await db.delete('classes', where: 'name = ?', whereArgs: [className]);
+    await db.delete('notes', where: 'class = ?', whereArgs: [className]);
+  }
 }
