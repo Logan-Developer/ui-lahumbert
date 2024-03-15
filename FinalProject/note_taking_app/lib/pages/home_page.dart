@@ -32,6 +32,12 @@ class _HomePageState extends State<HomePage> {
     });
   }
 
+  void addClass(String className) {
+    setState(() {
+      classes.add(className);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -60,7 +66,9 @@ class _HomePageState extends State<HomePage> {
                         }
                         return GestureDetector(
                             onTap: () {
-                              context.go('/class/$className');
+                              context
+                                  .push('/class/$className')
+                                  .then((value) => {if (value != null) {}});
                             },
                             child: Card(
                                 child: Column(children: [
@@ -73,7 +81,11 @@ class _HomePageState extends State<HomePage> {
         ])),
         floatingActionButton: FloatingActionButton.extended(
           onPressed: () {
-            context.go('/create-class');
+            context.push('/create-class').then((className) {
+              if (className != null) {
+                addClass(className as String);
+              }
+            });
           },
           label: const Text('Add Class'),
           icon: const Icon(Icons.add),

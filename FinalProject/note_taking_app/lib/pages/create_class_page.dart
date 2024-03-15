@@ -63,7 +63,7 @@ class _CreateClassPageState extends State<CreateClassPage> {
             children: [
               OutlinedButton(
                   onPressed: () {
-                    context.go('/');
+                    context.pop();
                   },
                   child: const Text('Cancel')),
               ElevatedButton(
@@ -73,7 +73,7 @@ class _CreateClassPageState extends State<CreateClassPage> {
                   } else {
                     createClass();
                   }
-                  context.go('/'); // fix data not updating on home page
+                  context.pop(_controller.text);
                 },
                 child:
                     Text(widget.currentClassName != null ? 'Edit' : 'Create'),
