@@ -32,4 +32,10 @@ class DataRepository {
     await db.delete('classes', where: 'name = ?', whereArgs: [className]);
     await db.delete('notes', where: 'class = ?', whereArgs: [className]);
   }
+
+  Future<void> updateClass(String oldClassName, String newClassName) async {
+    final db = await dal.db;
+    await db.update('classes', {'name': newClassName},
+        where: 'name = ?', whereArgs: [oldClassName]);
+  }
 }

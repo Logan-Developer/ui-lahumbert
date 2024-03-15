@@ -46,6 +46,16 @@ class MyApp extends StatelessWidget {
       builder: (context, state) =>
           const CreateClassPage(title: 'Create a class'),
     ),
+    GoRoute(
+        path: '/edit-class/:className',
+        builder: (context, state) {
+          final className = state.pathParameters['className'];
+          if (className == null) {
+            return const SizedBox.shrink();
+          }
+          return CreateClassPage(
+              title: 'Edit class $className', currentClassName: className);
+        }),
   ]);
 
   @override

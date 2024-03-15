@@ -48,6 +48,12 @@ class _NotesListPageState extends State<NotesListPage> {
         actions: [
           IconButton(
               onPressed: () {
+                context.go('/edit-class/${widget.className}');
+              },
+              icon: const Icon(Icons.edit),
+              tooltip: 'Edit class'),
+          IconButton(
+              onPressed: () {
                 // display a dialog to confirm the deletion
                 showDialog(
                     context: context,

@@ -5,17 +5,17 @@ import 'package:provider/provider.dart';
 import '../data_repository.dart';
 
 class CreateClassPage extends StatefulWidget {
-  const CreateClassPage({super.key, required this.title});
+  const CreateClassPage(
+      {super.key, required this.title, this.currentClassName});
 
   final String title;
+  final String? currentClassName;
 
   @override
   State<CreateClassPage> createState() => _CreateClassPageState();
 }
 
 class _CreateClassPageState extends State<CreateClassPage> {
-  String className = '';
-
   late TextEditingController _controller;
 
   @override
@@ -32,7 +32,12 @@ class _CreateClassPageState extends State<CreateClassPage> {
 
   Future<void> createClass() async {
     final repository = Provider.of<DataRepository>(context, listen: false);
-    await repository.addClass(className);
+    await repository.addClass(_controller.text);
+  }
+
+  Future<void> updateClass() async {
+    final repository = Provider.of<DataRepository>(context, listen: false);
+    await repository.updateClass(widget.currentClassName!, _controller.text);
   }
 
   @override
@@ -46,14 +51,11 @@ class _CreateClassPageState extends State<CreateClassPage> {
             child: Column(children: [
           const SizedBox(height: 20),
           TextField(
-            controller: _controller,
+            controller: _controller..text = widget.currentClassName ?? '',
             decoration: const InputDecoration(
               border: OutlineInputBorder(),
               labelText: 'Class name',
             ),
-            onChanged: (value) => setState(() {
-              className = value;
-            }),
           ),
           const SizedBox(height: 20),
           Row(
@@ -66,10 +68,15 @@ class _CreateClassPageState extends State<CreateClassPage> {
                   child: const Text('Cancel')),
               ElevatedButton(
                 onPressed: () {
-                  createClass();
+                  if (widget.currentClassName != null) {
+                    updateClass();
+                  } else {
+                    createClass();
+                  }
                   context.go('/'); // fix data not updating on home page
                 },
-                child: const Text('Create'),
+                child:
+                    Text(widget.currentClassName != null ? 'Edit' : 'Create'),
               )
             ],
           ),
