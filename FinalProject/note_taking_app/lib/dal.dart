@@ -39,10 +39,10 @@ class DAL {
     await db.execute('''
         CREATE TABLE notes (
           id INTEGER PRIMARY KEY,
-          class TEXT NOT NULL,
+          classID INTEGER NOT NULL,
           name TEXT NOT NULL,
           content TEXT,
-          FOREIGN KEY (class) REFERENCES classes (name)
+          FOREIGN KEY (classID) REFERENCES classes(id)
         )
       ''');
   }

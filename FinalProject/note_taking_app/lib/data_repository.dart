@@ -18,9 +18,12 @@ class DataRepository {
   Future<Map<String, dynamic>> fetchNote(
       String className, String noteName) async {
     final db = await dal.db;
-    final notes = await db.query('notes',
-        where: 'class = ? AND name = ?', whereArgs: [className, noteName]);
-    return notes.first;
+    final classData =
+        await db.query('classes', where: 'name = ?', whereArgs: [className]);
+    final classID = classData[0]['id'] as int;
+    final note = await db.query('notes',
+        where: 'classID = ? AND name = ?', whereArgs: [classID, noteName]);
+    return note[0];
   }
 
   Future<void> addClass(String className) async {
@@ -31,8 +34,14 @@ class DataRepository {
   Future<void> addNote(
       String className, String noteName, String content) async {
     final db = await dal.db;
-    await db.insert(
-        'notes', {'class': className, 'name': noteName, 'content': content});
+    final classData =
+        await db.query('classes', where: 'name = ?', whereArgs: [className]);
+    final classID = classData[0]['id'] as int;
+    await db.insert('notes', {
+      'classID': classID,
+      'name': noteName,
+      'content': content,
+    });
   }
 
   Future<void> deleteClass(String className) async {
