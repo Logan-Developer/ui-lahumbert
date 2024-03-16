@@ -34,6 +34,12 @@ class _NotesListPageState extends State<NotesListPage> {
     });
   }
 
+  Future<void> addNote(String noteName) async {
+    setState(() {
+      notes.add(noteName);
+    });
+  }
+
   Future<void> deleteClass() async {
     final repository = Provider.of<DataRepository>(context, listen: false);
     await repository.deleteClass(widget.className);
@@ -48,7 +54,7 @@ class _NotesListPageState extends State<NotesListPage> {
         actions: [
           IconButton(
               onPressed: () {
-                context.go('/class/${widget.className}/edit');
+                context.push('/class/${widget.className}/edit');
               },
               icon: const Icon(Icons.edit),
               tooltip: 'Edit class'),
@@ -70,7 +76,8 @@ class _NotesListPageState extends State<NotesListPage> {
                               child: const Text('Cancel')),
                           TextButton(
                               onPressed: () {
-                                deleteClass().then((value) => context.go('/'));
+                                deleteClass().then(
+                                    (value) => context.pop(widget.className));
                               },
                               child: const Text('Delete'))
                         ],
@@ -117,7 +124,11 @@ class _NotesListPageState extends State<NotesListPage> {
       ])),
       floatingActionButton: FloatingActionButton.extended(
         onPressed: () {
-          context.go('/class/${widget.className}/create-note');
+          context
+              .push('/class/${widget.className}/create-note')
+              .then((value) => {
+                    if (value != null) {addNote(value as String)}
+                  });
         },
         label: const Text('Add Note'),
         icon: const Icon(Icons.add),

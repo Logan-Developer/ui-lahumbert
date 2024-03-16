@@ -66,9 +66,7 @@ class _HomePageState extends State<HomePage> {
                         }
                         return GestureDetector(
                             onTap: () {
-                              context
-                                  .push('/class/$className')
-                                  .then((value) => {if (value != null) {}});
+                              context.push('/class/$className');
                             },
                             child: Card(
                                 child: Column(children: [
