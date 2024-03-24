@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_quill/flutter_quill.dart';
 import 'package:go_router/go_router.dart';
+import 'package:note_taking_app/widgets/my_quill_toolbar.dart';
 import 'package:provider/provider.dart';
 
 import '../data_repository.dart';
@@ -26,6 +28,8 @@ class _CreateNotePageState extends State<CreateNotePage> {
 
   late TextEditingController _noteNameController, _contentController;
 
+  late QuillController _contentQuillController;
+
   @override
   void initState() {
     super.initState();
@@ -33,6 +37,8 @@ class _CreateNotePageState extends State<CreateNotePage> {
       ..text = widget.currentNoteName ?? '';
     _contentController = TextEditingController()
       ..text = widget.currentNoteContent ?? '';
+
+    _contentQuillController = QuillController.basic();
   }
 
   @override
@@ -74,16 +80,17 @@ class _CreateNotePageState extends State<CreateNotePage> {
             }),
           ),
           const SizedBox(height: 20),
-          TextField(
-            controller: _contentController,
-            decoration: const InputDecoration(
-              border: OutlineInputBorder(),
-              labelText: 'Content',
+          MyQuillToolbar(controller: _contentQuillController),
+          Expanded(
+            child: QuillEditor.basic(
+              configurations: QuillEditorConfigurations(
+                controller: _contentQuillController,
+                readOnly: false,
+                sharedConfigurations: const QuillSharedConfigurations(
+                  locale: Locale('en'),
+                ),
+              ),
             ),
-            maxLines: 10,
-            onChanged: (value) => setState(() {
-              content = value;
-            }),
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
