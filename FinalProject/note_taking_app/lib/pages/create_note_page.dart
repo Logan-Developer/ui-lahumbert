@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_quill/flutter_quill.dart';
 import 'package:go_router/go_router.dart';
+import 'package:note_taking_app/widgets/my_quill_editor.dart';
 import 'package:note_taking_app/widgets/my_quill_toolbar.dart';
 import 'package:provider/provider.dart';
 
@@ -82,14 +83,8 @@ class _CreateNotePageState extends State<CreateNotePage> {
           const SizedBox(height: 20),
           MyQuillToolbar(controller: _contentQuillController),
           Expanded(
-            child: QuillEditor.basic(
-              configurations: QuillEditorConfigurations(
-                controller: _contentQuillController,
-                readOnly: false,
-                sharedConfigurations: const QuillSharedConfigurations(
-                  locale: Locale('en'),
-                ),
-              ),
+            child: MyQuillEditor(
+              controller: _contentQuillController,
             ),
           ),
           Row(
