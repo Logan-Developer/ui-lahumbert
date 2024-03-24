@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 
 import '../data_repository.dart';
 import '../widgets/my_search_widget.dart';
+import '../types.dart';
 
 class NotesListPage extends StatefulWidget {
   const NotesListPage(
@@ -54,7 +55,17 @@ class _NotesListPageState extends State<NotesListPage> {
         actions: [
           IconButton(
               onPressed: () {
-                context.push('/class/${widget.className}/edit');
+                context
+                    .push('/class/${widget.className}/edit')
+                    .then((value) => {
+                          if (value != null)
+                            {
+                              context.pop(NoteListPageExtra(
+                                  type: NoteListPageExtraType.edit,
+                                  className: value as String,
+                                  oldClassName: widget.className))
+                            }
+                        });
               },
               icon: const Icon(Icons.edit),
               tooltip: 'Edit class'),
@@ -76,8 +87,12 @@ class _NotesListPageState extends State<NotesListPage> {
                               child: const Text('Cancel')),
                           TextButton(
                               onPressed: () {
-                                deleteClass().then(
-                                    (value) => context.pop(widget.className));
+                                deleteClass().then((value) => {
+                                      context.pop(),
+                                      context.pop(NoteListPageExtra(
+                                          type: NoteListPageExtraType.delete,
+                                          className: widget.className))
+                                    });
                               },
                               child: const Text('Delete'))
                         ],

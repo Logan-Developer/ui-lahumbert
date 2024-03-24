@@ -5,6 +5,8 @@ import 'package:provider/provider.dart';
 import '../data_repository.dart';
 import '../widgets/my_search_widget.dart';
 
+import '../types.dart';
+
 class HomePage extends StatefulWidget {
   const HomePage({super.key, required this.title});
 
@@ -38,6 +40,20 @@ class _HomePageState extends State<HomePage> {
     });
   }
 
+  void editClass(String oldClassName, String newClassName) {
+    setState(() {
+      print('oldClassName: $oldClassName, newClassName: $newClassName');
+      final index = classes.indexOf(oldClassName);
+      classes[index] = newClassName;
+    });
+  }
+
+  void deleteClass(String className) {
+    setState(() {
+      classes.remove(className);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -66,7 +82,19 @@ class _HomePageState extends State<HomePage> {
                         }
                         return GestureDetector(
                             onTap: () {
-                              context.push('/class/$className');
+                              context.push('/class/$className').then((value) {
+                                if (value is NoteListPageExtra) {
+                                  final extra = value;
+                                  if (extra.type ==
+                                      NoteListPageExtraType.delete) {
+                                    deleteClass(extra.className);
+                                  } else if (extra.type ==
+                                      NoteListPageExtraType.edit) {
+                                    editClass(
+                                        extra.oldClassName, extra.className);
+                                  }
+                                }
+                              });
                             },
                             child: Card(
                                 child: Column(children: [
