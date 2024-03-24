@@ -21,7 +21,7 @@ class _CreateClassPageState extends State<CreateClassPage> {
   @override
   void initState() {
     super.initState();
-    _controller = TextEditingController();
+    _controller = TextEditingController()..text = widget.currentClassName ?? '';
   }
 
   @override
@@ -51,7 +51,7 @@ class _CreateClassPageState extends State<CreateClassPage> {
             child: Column(children: [
           const SizedBox(height: 20),
           TextField(
-            controller: _controller..text = widget.currentClassName ?? '',
+            controller: _controller,
             decoration: const InputDecoration(
               border: OutlineInputBorder(),
               labelText: 'Class name',

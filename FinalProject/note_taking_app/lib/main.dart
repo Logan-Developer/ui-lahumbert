@@ -62,7 +62,24 @@ class MyApp extends StatelessWidget {
                 }
                 return NoteDetails(
                     title: noteName, className: className, noteName: noteName);
-              })
+              },
+              routes: [
+                GoRoute(
+                    path: 'edit',
+                    builder: (context, state) {
+                      final className = state.pathParameters['className'];
+                      final noteName = state.pathParameters['noteName'];
+                      final content = state.extra as String?;
+                      if (className == null || noteName == null) {
+                        return const SizedBox.shrink();
+                      }
+                      return CreateNotePage(
+                          title: 'Edit note $noteName',
+                          className: className,
+                          currentNoteName: noteName,
+                          currentNoteContent: content);
+                    })
+              ])
         ]),
     GoRoute(
       path: '/create-class',

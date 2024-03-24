@@ -51,6 +51,24 @@ class _NoteDetailsState extends State<NoteDetails> {
         actions: [
           IconButton(
               onPressed: () {
+                context
+                    .push('/class/${widget.className}/${widget.noteName}/edit',
+                        extra: _noteContent)
+                    .then((value) => {
+                          if (value != null)
+                            {
+                              context.pop(NoteDetailsExtra(
+                                  type: ExtraType.edit,
+                                  className: widget.className,
+                                  noteName: value as String,
+                                  oldNoteName: widget.noteName))
+                            }
+                        });
+              },
+              icon: const Icon(Icons.edit),
+              tooltip: 'Edit note'),
+          IconButton(
+              onPressed: () {
                 // display a dialog to confirm the deletion
                 showDialog(
                     context: context,

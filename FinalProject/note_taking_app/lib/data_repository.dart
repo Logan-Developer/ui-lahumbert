@@ -67,4 +67,14 @@ class DataRepository {
     await db.update('classes', {'name': newClassName},
         where: 'name = ?', whereArgs: [oldClassName]);
   }
+
+  Future<void> updateNote(String className, String oldNoteName,
+      String newNoteName, String content) async {
+    final db = await dal.db;
+    final classData =
+        await db.query('classes', where: 'name = ?', whereArgs: [className]);
+    final classID = classData[0]['id'] as int;
+    await db.update('notes', {'name': newNoteName, 'content': content},
+        where: 'classID = ? AND name = ?', whereArgs: [classID, oldNoteName]);
+  }
 }

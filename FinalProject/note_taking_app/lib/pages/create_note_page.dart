@@ -6,10 +6,16 @@ import '../data_repository.dart';
 
 class CreateNotePage extends StatefulWidget {
   const CreateNotePage(
-      {super.key, required this.title, required this.className});
+      {super.key,
+      required this.title,
+      required this.className,
+      this.currentNoteName,
+      this.currentNoteContent});
 
   final String title;
   final String className;
+  final String? currentNoteName;
+  final String? currentNoteContent;
 
   @override
   State<CreateNotePage> createState() => _CreateNotePageState();
@@ -23,8 +29,10 @@ class _CreateNotePageState extends State<CreateNotePage> {
   @override
   void initState() {
     super.initState();
-    _noteNameController = TextEditingController();
-    _contentController = TextEditingController();
+    _noteNameController = TextEditingController()
+      ..text = widget.currentNoteName ?? '';
+    _contentController = TextEditingController()
+      ..text = widget.currentNoteContent ?? '';
   }
 
   @override
@@ -37,6 +45,12 @@ class _CreateNotePageState extends State<CreateNotePage> {
   Future<void> createNote() async {
     final repository = Provider.of<DataRepository>(context, listen: false);
     await repository.addNote(widget.className, noteName, content);
+  }
+
+  Future<void> updateNote() async {
+    final repository = Provider.of<DataRepository>(context, listen: false);
+    await repository.updateNote(
+        widget.className, widget.currentNoteName!, noteName, content);
   }
 
   @override
@@ -81,10 +95,14 @@ class _CreateNotePageState extends State<CreateNotePage> {
                   child: const Text('Cancel')),
               ElevatedButton(
                 onPressed: () {
-                  createNote();
+                  if (widget.currentNoteName != null) {
+                    updateNote();
+                  } else {
+                    createNote();
+                  }
                   context.pop(_noteNameController.text);
                 },
-                child: const Text('Create'),
+                child: Text(widget.currentNoteName != null ? 'Edit' : 'Create'),
               )
             ],
           ),
