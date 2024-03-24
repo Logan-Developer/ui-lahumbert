@@ -10,8 +10,11 @@ class DataRepository {
 
   Future<List<String>> fetchNotes(String className) async {
     final db = await dal.db;
+    final classData =
+        await db.query('classes', where: 'name = ?', whereArgs: [className]);
+    final classID = classData[0]['id'] as int;
     final notes =
-        await db.query('notes', where: 'class = ?', whereArgs: [className]);
+        await db.query('notes', where: 'classID = ?', whereArgs: [classID]);
     return notes.map((e) => e['name'] as String).toList();
   }
 
