@@ -42,7 +42,6 @@ class _HomePageState extends State<HomePage> {
 
   void editClass(String oldClassName, String newClassName) {
     setState(() {
-      print('oldClassName: $oldClassName, newClassName: $newClassName');
       final index = classes.indexOf(oldClassName);
       classes[index] = newClassName;
     });
@@ -85,11 +84,9 @@ class _HomePageState extends State<HomePage> {
                               context.push('/class/$className').then((value) {
                                 if (value is NoteListPageExtra) {
                                   final extra = value;
-                                  if (extra.type ==
-                                      NoteListPageExtraType.delete) {
+                                  if (extra.type == ExtraType.delete) {
                                     deleteClass(extra.className);
-                                  } else if (extra.type ==
-                                      NoteListPageExtraType.edit) {
+                                  } else if (extra.type == ExtraType.edit) {
                                     editClass(
                                         extra.oldClassName, extra.className);
                                   }

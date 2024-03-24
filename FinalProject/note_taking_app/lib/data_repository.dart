@@ -55,8 +55,11 @@ class DataRepository {
 
   Future<void> deleteNote(String className, String noteName) async {
     final db = await dal.db;
+    final classData =
+        await db.query('classes', where: 'name = ?', whereArgs: [className]);
+    final classID = classData[0]['id'] as int;
     await db.delete('notes',
-        where: 'class = ? AND name = ?', whereArgs: [className, noteName]);
+        where: 'classID = ? AND name = ?', whereArgs: [classID, noteName]);
   }
 
   Future<void> updateClass(String oldClassName, String newClassName) async {

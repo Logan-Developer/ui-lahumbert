@@ -3,6 +3,7 @@ import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
 import '../data_repository.dart';
+import '../types.dart';
 
 class NoteDetails extends StatefulWidget {
   const NoteDetails(
@@ -66,8 +67,13 @@ class _NoteDetailsState extends State<NoteDetails> {
                               child: const Text('Cancel')),
                           TextButton(
                               onPressed: () async {
-                                await deleteNote().then((value) =>
-                                    context.go('/class/${widget.className}'));
+                                await deleteNote().then((value) => {
+                                      context.pop(),
+                                      context.pop(NoteDetailsExtra(
+                                          type: ExtraType.delete,
+                                          className: widget.className,
+                                          noteName: widget.noteName))
+                                    });
                               },
                               child: const Text('Delete')),
                         ],

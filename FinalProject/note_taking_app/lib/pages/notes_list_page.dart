@@ -46,6 +46,19 @@ class _NotesListPageState extends State<NotesListPage> {
     await repository.deleteClass(widget.className);
   }
 
+  void editNote(String oldNoteName, String newNoteName) {
+    setState(() {
+      final index = notes.indexOf(oldNoteName);
+      notes[index] = newNoteName;
+    });
+  }
+
+  void deleteNote(String noteName) {
+    setState(() {
+      notes.remove(noteName);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -61,7 +74,7 @@ class _NotesListPageState extends State<NotesListPage> {
                           if (value != null)
                             {
                               context.pop(NoteListPageExtra(
-                                  type: NoteListPageExtraType.edit,
+                                  type: ExtraType.edit,
                                   className: value as String,
                                   oldClassName: widget.className))
                             }
@@ -90,7 +103,7 @@ class _NotesListPageState extends State<NotesListPage> {
                                 deleteClass().then((value) => {
                                       context.pop(),
                                       context.pop(NoteListPageExtra(
-                                          type: NoteListPageExtraType.delete,
+                                          type: ExtraType.delete,
                                           className: widget.className))
                                     });
                               },
@@ -125,7 +138,18 @@ class _NotesListPageState extends State<NotesListPage> {
                       }
                       return GestureDetector(
                           onTap: () {
-                            context.go('/class/${widget.className}/$className');
+                            context
+                                .push('/class/${widget.className}/$className')
+                                .then((value) {
+                              if (value is NoteDetailsExtra) {
+                                final extra = value;
+                                if (extra.type == ExtraType.delete) {
+                                  deleteNote(extra.noteName);
+                                } else if (extra.type == ExtraType.edit) {
+                                  editNote(extra.oldNoteName, extra.noteName);
+                                }
+                              }
+                            });
                           },
                           child: Card(
                             child: Column(children: [

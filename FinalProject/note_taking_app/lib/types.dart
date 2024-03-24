@@ -1,7 +1,7 @@
-enum NoteListPageExtraType { delete, edit }
+enum ExtraType { delete, edit }
 
 class NoteListPageExtra {
-  final NoteListPageExtraType type;
+  final ExtraType type;
   final String className;
   final String oldClassName;
 
@@ -9,5 +9,19 @@ class NoteListPageExtra {
     required this.type,
     required this.className,
     this.oldClassName = '',
+  });
+}
+
+class NoteDetailsExtra {
+  final ExtraType type;
+  final String className;
+  final String noteName;
+  final String oldNoteName;
+
+  NoteDetailsExtra({
+    required this.type,
+    required this.className,
+    required this.noteName,
+    this.oldNoteName = '',
   });
 }
