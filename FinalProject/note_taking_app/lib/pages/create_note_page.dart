@@ -35,6 +35,8 @@ class _CreateNotePageState extends State<CreateNotePage> {
 
   late QuillController _contentQuillController;
 
+  final _formKey = GlobalKey<FormState>();
+
   @override
   void initState() {
     super.initState();
@@ -73,43 +75,58 @@ class _CreateNotePageState extends State<CreateNotePage> {
           title: Text(widget.title),
         ),
         body: Center(
-            child: Column(children: [
-          const SizedBox(height: 20),
-          TextField(
-            controller: _noteNameController,
-            decoration: const InputDecoration(
-              border: OutlineInputBorder(),
-              labelText: 'Note name',
-            ),
-          ),
-          const SizedBox(height: 20),
-          MyQuillToolbar(controller: _contentQuillController),
-          Expanded(
-            child: MyQuillEditor(
-              controller: _contentQuillController,
-            ),
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              OutlinedButton(
-                  onPressed: () {
-                    context.pop();
-                  },
-                  child: const Text('Cancel')),
-              ElevatedButton(
-                onPressed: () {
-                  if (widget.currentNoteName != null) {
-                    updateNote();
-                  } else {
-                    createNote();
-                  }
-                  context.pop(_noteNameController.text);
-                },
-                child: Text(widget.currentNoteName != null ? 'Edit' : 'Create'),
-              )
-            ],
-          ),
-        ])));
+            child: Form(
+                key: _formKey,
+                child: Column(children: [
+                  const SizedBox(height: 20),
+                  TextFormField(
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Please enter a note name';
+                      }
+                      if (value.length > 20) {
+                        return 'Note name must be less than 20 characters';
+                      }
+                      return null;
+                    },
+                    controller: _noteNameController,
+                    decoration: const InputDecoration(
+                      border: OutlineInputBorder(),
+                      labelText: 'Note name',
+                    ),
+                  ),
+                  const SizedBox(height: 20),
+                  MyQuillToolbar(controller: _contentQuillController),
+                  Expanded(
+                    child: MyQuillEditor(
+                      controller: _contentQuillController,
+                    ),
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      OutlinedButton(
+                          onPressed: () {
+                            context.pop();
+                          },
+                          child: const Text('Cancel')),
+                      ElevatedButton(
+                        onPressed: () {
+                          if (!_formKey.currentState!.validate()) {
+                            return;
+                          }
+                          if (widget.currentNoteName != null) {
+                            updateNote();
+                          } else {
+                            createNote();
+                          }
+                          context.pop(_noteNameController.text);
+                        },
+                        child: Text(
+                            widget.currentNoteName != null ? 'Edit' : 'Create'),
+                      )
+                    ],
+                  ),
+                ]))));
   }
 }

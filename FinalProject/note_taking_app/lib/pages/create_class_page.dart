@@ -17,6 +17,7 @@ class CreateClassPage extends StatefulWidget {
 
 class _CreateClassPageState extends State<CreateClassPage> {
   late TextEditingController _controller;
+  final _formKey = GlobalKey<FormState>();
 
   @override
   void initState() {
@@ -48,38 +49,53 @@ class _CreateClassPageState extends State<CreateClassPage> {
           title: Text(widget.title),
         ),
         body: Center(
-            child: Column(children: [
-          const SizedBox(height: 20),
-          TextField(
-            controller: _controller,
-            decoration: const InputDecoration(
-              border: OutlineInputBorder(),
-              labelText: 'Class name',
-            ),
-          ),
-          const SizedBox(height: 20),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              OutlinedButton(
-                  onPressed: () {
-                    context.pop();
-                  },
-                  child: const Text('Cancel')),
-              ElevatedButton(
-                onPressed: () {
-                  if (widget.currentClassName != null) {
-                    updateClass();
-                  } else {
-                    createClass();
-                  }
-                  context.pop(_controller.text);
-                },
-                child:
-                    Text(widget.currentClassName != null ? 'Edit' : 'Create'),
-              )
-            ],
-          ),
-        ])));
+            child: Form(
+                key: _formKey,
+                child: Column(children: [
+                  const SizedBox(height: 20),
+                  TextFormField(
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Please enter a class name';
+                      }
+                      if (value.length > 20) {
+                        return 'Class name must be less than 20 characters';
+                      }
+                      return null;
+                    },
+                    controller: _controller,
+                    decoration: const InputDecoration(
+                      border: OutlineInputBorder(),
+                      labelText: 'Class name',
+                    ),
+                  ),
+                  const SizedBox(height: 20),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      OutlinedButton(
+                          onPressed: () {
+                            context.pop();
+                          },
+                          child: const Text('Cancel')),
+                      ElevatedButton(
+                        onPressed: () {
+                          if (!_formKey.currentState!.validate()) {
+                            return;
+                          }
+                          if (widget.currentClassName != null) {
+                            updateClass();
+                          } else {
+                            createClass();
+                          }
+                          context.pop(_controller.text);
+                        },
+                        child: Text(widget.currentClassName != null
+                            ? 'Edit'
+                            : 'Create'),
+                      )
+                    ],
+                  ),
+                ]))));
   }
 }
