@@ -1,7 +1,7 @@
-import 'dart:io';
-
+import 'package:flutter/foundation.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:sqflite/sqflite.dart';
+import 'package:sqflite_common_ffi_web/sqflite_ffi_web.dart';
 
 class DAL {
   static final DAL _instance = DAL._internal();
@@ -9,6 +9,8 @@ class DAL {
   DAL._internal();
 
   static Database? _db;
+  static late DatabaseFactory _factory;
+  static late String _path;
 
   Future<Database> get db async {
     if (_db != null) {
@@ -19,13 +21,18 @@ class DAL {
   }
 
   Future<Database> _initDb() async {
-    Directory documentsDirectory = await getApplicationDocumentsDirectory();
-    String path = '${documentsDirectory.path}notes.db';
-    return await openDatabase(
-      path,
-      version: 1,
-      onCreate: _onCreate,
-    );
+    if (kIsWeb) {
+      _factory = databaseFactoryFfiWeb;
+      _path = 'notes.db';
+    } else {
+      _factory = databaseFactory;
+      _path = '${(await getApplicationDocumentsDirectory()).path}notes.db';
+    }
+    return await _factory.openDatabase(_path,
+        options: OpenDatabaseOptions(
+          version: 1,
+          onCreate: _onCreate,
+        ));
   }
 
   Future _onCreate(Database db, int version) async {
