@@ -14,15 +14,18 @@ import 'package:path/path.dart' as path;
 class MyQuillEditor extends StatelessWidget {
   const MyQuillEditor({
     required this.controller,
+    this.isReadOnly,
     super.key,
   });
 
   final QuillController controller;
+  final bool? isReadOnly;
 
   @override
   Widget build(BuildContext context) {
     return QuillEditor.basic(
       configurations: QuillEditorConfigurations(
+        readOnly: isReadOnly ?? false,
         controller: controller,
         elementOptions: const QuillEditorElementOptions(
           codeBlock: QuillEditorCodeBlockElementOptions(

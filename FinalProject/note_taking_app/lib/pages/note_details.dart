@@ -1,9 +1,13 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:flutter_quill/flutter_quill.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
 import '../data_repository.dart';
 import '../types.dart';
+import '../widgets/my_quill_editor.dart';
 
 class NoteDetails extends StatefulWidget {
   const NoteDetails(
@@ -23,10 +27,17 @@ class NoteDetails extends StatefulWidget {
 class _NoteDetailsState extends State<NoteDetails> {
   String _noteContent = '';
 
+  late QuillController _contentQuillController;
+
   @override
   void initState() {
     super.initState();
-    fetchNote();
+    fetchNote().then((value) => {
+          setState(() {
+            _contentQuillController = QuillController.basic()
+              ..document = Document.fromJson(jsonDecode(_noteContent));
+          })
+        });
   }
 
   Future<void> fetchNote() async {
@@ -107,8 +118,9 @@ class _NoteDetailsState extends State<NoteDetails> {
         child: Column(
           children: [
             Expanded(
-              child: SingleChildScrollView(
-                child: Text(_noteContent),
+              child: MyQuillEditor(
+                controller: _contentQuillController,
+                isReadOnly: true,
               ),
             ),
           ],
