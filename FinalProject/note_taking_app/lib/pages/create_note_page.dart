@@ -27,7 +27,7 @@ class CreateNotePage extends StatefulWidget {
 }
 
 class _CreateNotePageState extends State<CreateNotePage> {
-  String noteName = '';
+  String get noteName => _noteNameController.text;
   String get content =>
       jsonEncode(_contentQuillController.document.toDelta().toJson());
 
@@ -81,9 +81,6 @@ class _CreateNotePageState extends State<CreateNotePage> {
               border: OutlineInputBorder(),
               labelText: 'Note name',
             ),
-            onChanged: (value) => setState(() {
-              noteName = value;
-            }),
           ),
           const SizedBox(height: 20),
           MyQuillToolbar(controller: _contentQuillController),
