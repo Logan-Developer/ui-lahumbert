@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_quill/flutter_quill.dart';
 import 'package:go_router/go_router.dart';
@@ -25,9 +27,11 @@ class CreateNotePage extends StatefulWidget {
 }
 
 class _CreateNotePageState extends State<CreateNotePage> {
-  String noteName = '', content = '';
+  String noteName = '';
+  String get content =>
+      jsonEncode(_contentQuillController.document.toDelta().toJson());
 
-  late TextEditingController _noteNameController, _contentController;
+  late TextEditingController _noteNameController;
 
   late QuillController _contentQuillController;
 
@@ -36,16 +40,17 @@ class _CreateNotePageState extends State<CreateNotePage> {
     super.initState();
     _noteNameController = TextEditingController()
       ..text = widget.currentNoteName ?? '';
-    _contentController = TextEditingController()
-      ..text = widget.currentNoteContent ?? '';
 
-    _contentQuillController = QuillController.basic();
+    _contentQuillController = QuillController.basic()
+      ..document = widget.currentNoteContent != null
+          ? Document.fromJson(jsonDecode(widget.currentNoteContent!))
+          : Document();
   }
 
   @override
   void dispose() {
     _noteNameController.dispose();
-    _contentController.dispose();
+    _contentQuillController.dispose();
     super.dispose();
   }
 
