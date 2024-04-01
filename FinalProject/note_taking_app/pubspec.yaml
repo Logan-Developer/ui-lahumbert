@@ -1,4 +1,4 @@
-name: ClassSnap
+name: classsnap
 description: "A small application to help students take notes quickly and easily."
 # The following line prevents the package from being accidentally published to
 # pub.dev using `flutter pub publish`. This is preferred for private packages.
