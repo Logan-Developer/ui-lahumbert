@@ -3,8 +3,8 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter_quill/flutter_quill.dart';
 import 'package:go_router/go_router.dart';
-import 'package:note_taking_app/widgets/my_quill_editor.dart';
-import 'package:note_taking_app/widgets/my_quill_toolbar.dart';
+import 'package:classsnap/widgets/my_quill_editor.dart';
+import 'package:classsnap/widgets/my_quill_toolbar.dart';
 import 'package:provider/provider.dart';
 
 import '../data_repository.dart';

@@ -1,4 +1,4 @@
-package com.example.note_taking_app
+package com.lahumbert.classsnap
 
 import io.flutter.embedding.android.FlutterActivity
 

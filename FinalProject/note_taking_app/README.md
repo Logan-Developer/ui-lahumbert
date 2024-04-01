@@ -1,4 +1,4 @@
-# note_taking_app
+# Class Snap
 
 A new Flutter project.
 
