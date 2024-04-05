@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
 import '../data_repository.dart';
@@ -18,7 +19,7 @@ class NotesListPage extends StatefulWidget {
 }
 
 class _NotesListPageState extends State<NotesListPage> {
-  List<String> notes = [];
+  List<dynamic> notes = [];
   String searchValue = '';
 
   @override
@@ -37,7 +38,7 @@ class _NotesListPageState extends State<NotesListPage> {
 
   Future<void> addNote(String noteName) async {
     setState(() {
-      notes.add(noteName);
+      notes.add({'name': noteName, 'lastUpdated': DateTime.now()});
     });
   }
 
@@ -131,15 +132,16 @@ class _NotesListPageState extends State<NotesListPage> {
                         const SizedBox(height: 10),
                     itemCount: notes.length,
                     itemBuilder: (BuildContext context, int index) {
-                      final className = notes[index];
+                      final String noteName = notes[index]['name'];
+                      final DateTime lastUpdated = notes[index]['lastUpdated'];
                       if (searchValue.isNotEmpty &&
-                          !className.contains(searchValue)) {
+                          !noteName.contains(searchValue)) {
                         return const SizedBox.shrink();
                       }
                       return GestureDetector(
                           onTap: () {
                             context
-                                .push('/class/${widget.className}/$className')
+                                .push('/class/${widget.className}/$noteName')
                                 .then((value) {
                               if (value is NoteDetailsExtra) {
                                 final extra = value;
@@ -155,7 +157,8 @@ class _NotesListPageState extends State<NotesListPage> {
                             child: Column(children: [
                               ListTile(
                                 title: Text(notes[index]),
-                                subtitle: const Text('Last changed DATE'),
+                                subtitle: Text(
+                                    'Last changed on ${DateFormat('yyyy-MM-dd HH:mm').format(lastUpdated)}'),
                               )
                             ]),
                           ));

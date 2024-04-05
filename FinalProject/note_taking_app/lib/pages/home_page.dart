@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
 import '../data_repository.dart';
@@ -17,7 +18,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  List<String> classes = [];
+  List<dynamic> classes = [];
   String searchValue = '';
 
   @override
@@ -36,7 +37,7 @@ class _HomePageState extends State<HomePage> {
 
   void addClass(String className) {
     setState(() {
-      classes.add(className);
+      classes.add({'name': className, 'lastUpdated': DateTime.now()});
     });
   }
 
@@ -74,7 +75,9 @@ class _HomePageState extends State<HomePage> {
                           const SizedBox(height: 10),
                       itemCount: classes.length,
                       itemBuilder: (BuildContext context, int index) {
-                        final className = classes[index];
+                        final String className = classes[index]['name'];
+                        final DateTime lastUpdated =
+                            classes[index]['lastUpdated'];
                         if (searchValue.isNotEmpty &&
                             !className.contains(searchValue)) {
                           return const SizedBox.shrink();
@@ -97,7 +100,8 @@ class _HomePageState extends State<HomePage> {
                                 child: Column(children: [
                               ListTile(
                                 title: Text(className),
-                                subtitle: const Text('Last changed DATE'),
+                                subtitle: Text(
+                                    'Last changed on ${DateFormat('yyyy-MM-dd HH:mm').format(lastUpdated)}'),
                               ),
                             ])));
                       }))),

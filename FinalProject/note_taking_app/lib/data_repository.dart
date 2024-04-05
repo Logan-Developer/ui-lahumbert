@@ -2,20 +2,20 @@ import 'dal.dart';
 
 class DataRepository {
   final dal = DAL();
-  Future<List<String>> fetchClasses() async {
+  Future<List<dynamic>> fetchClasses() async {
     final db = await dal.db;
     final classes = await db.query('classes');
-    return classes.map((e) => e['name'] as String).toList();
+    return classes.toList();
   }
 
-  Future<List<String>> fetchNotes(String className) async {
+  Future<List<dynamic>> fetchNotes(String className) async {
     final db = await dal.db;
     final classData =
         await db.query('classes', where: 'name = ?', whereArgs: [className]);
     final classID = classData[0]['id'] as int;
     final notes =
         await db.query('notes', where: 'classID = ?', whereArgs: [classID]);
-    return notes.map((e) => e['name'] as String).toList();
+    return notes.toList();
   }
 
   Future<Map<String, dynamic>> fetchNote(

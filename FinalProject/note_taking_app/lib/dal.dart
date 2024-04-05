@@ -40,7 +40,8 @@ class DAL {
     await db.execute('''
         CREATE TABLE classes (
           id INTEGER PRIMARY KEY,
-          name TEXT NOT NULL
+          name TEXT NOT NULL,
+          lastUpdated DATETIME DEFAULT CURRENT_TIMESTAMP
         )
       ''');
     await db.execute('''
@@ -49,6 +50,7 @@ class DAL {
           classID INTEGER NOT NULL,
           name TEXT NOT NULL,
           content TEXT,
+          lastUpdated DATETIME DEFAULT CURRENT_TIMESTAMP,
           FOREIGN KEY (classID) REFERENCES classes(id)
         )
       ''');
