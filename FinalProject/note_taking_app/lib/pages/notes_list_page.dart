@@ -53,6 +53,7 @@ class _NotesListPageState extends State<NotesListPage> {
       final index = notes.indexOf(oldNoteName);
       notes[index] = newNoteName;
     });
+    notes.sort((a, b) => b['lastUpdated'].compareTo(a['lastUpdated']));
   }
 
   void deleteNote(String noteName) {

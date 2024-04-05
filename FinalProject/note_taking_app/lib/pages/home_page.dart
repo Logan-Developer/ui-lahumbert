@@ -47,6 +47,7 @@ class _HomePageState extends State<HomePage> {
       final index = classes.indexOf(oldClassName);
       classes[index] = newClassName;
     });
+    classes.sort((a, b) => b['lastUpdated'].compareTo(a['lastUpdated']));
   }
 
   void deleteClass(String className) {
