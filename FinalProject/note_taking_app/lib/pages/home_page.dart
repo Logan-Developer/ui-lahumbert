@@ -30,6 +30,7 @@ class _HomePageState extends State<HomePage> {
   Future<void> loadClasses() async {
     final repository = Provider.of<DataRepository>(context, listen: false);
     final classes = await repository.fetchClasses();
+    classes.sort((a, b) => b['lastUpdated'].compareTo(a['lastUpdated']));
     setState(() {
       this.classes = classes;
     });
@@ -37,7 +38,7 @@ class _HomePageState extends State<HomePage> {
 
   void addClass(String className) {
     setState(() {
-      classes.add({'name': className, 'lastUpdated': DateTime.now()});
+      classes.insert(0, {'name': className, 'lastUpdated': DateTime.now()});
     });
   }
 

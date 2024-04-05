@@ -31,6 +31,7 @@ class _NotesListPageState extends State<NotesListPage> {
   Future<void> loadNotes() async {
     final repository = Provider.of<DataRepository>(context, listen: false);
     final notes = await repository.fetchNotes(widget.className);
+    notes.sort((a, b) => b['lastUpdated'].compareTo(a['lastUpdated']));
     setState(() {
       this.notes = notes;
     });
@@ -38,7 +39,7 @@ class _NotesListPageState extends State<NotesListPage> {
 
   Future<void> addNote(String noteName) async {
     setState(() {
-      notes.add({'name': noteName, 'lastUpdated': DateTime.now()});
+      notes.insert(0, {'name': noteName, 'lastUpdated': DateTime.now()});
     });
   }
 
