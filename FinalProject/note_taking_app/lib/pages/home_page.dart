@@ -83,7 +83,9 @@ class _HomePageState extends State<HomePage> {
                         final String lastUpdated =
                             classes[index]['lastUpdated'];
                         if (searchValue.isNotEmpty &&
-                            !className.contains(searchValue)) {
+                            !className
+                                .toLowerCase()
+                                .contains(searchValue.toLowerCase())) {
                           return const SizedBox.shrink();
                         }
                         return GestureDetector(

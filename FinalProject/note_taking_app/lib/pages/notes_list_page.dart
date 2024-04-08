@@ -139,7 +139,9 @@ class _NotesListPageState extends State<NotesListPage> {
                       final String noteName = notes[index]['name'];
                       final String lastUpdated = notes[index]['lastUpdated'];
                       if (searchValue.isNotEmpty &&
-                          !noteName.contains(searchValue)) {
+                          !noteName
+                              .toLowerCase()
+                              .contains(searchValue.toLowerCase())) {
                         return const SizedBox.shrink();
                       }
                       return GestureDetector(
