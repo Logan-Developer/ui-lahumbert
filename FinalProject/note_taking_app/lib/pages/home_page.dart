@@ -101,7 +101,7 @@ class _HomePageState extends State<HomePage> {
                                         extra.oldClassName, extra.className);
                                   }
                                 }
-                              });
+                              }).then((value) => loadClasses());
                             },
                             child: Card(
                                 child: Column(children: [
