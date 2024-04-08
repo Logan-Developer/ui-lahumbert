@@ -117,12 +117,14 @@ class _NoteDetailsState extends State<NoteDetails> {
         padding: const EdgeInsets.all(20),
         child: Column(
           children: [
-            Expanded(
-              child: MyQuillEditor(
-                controller: _contentQuillController,
-                isReadOnly: true,
-              ),
-            ),
+            _noteContent == '[{"insert":"\\n"}]'
+                ? Container()
+                : Expanded(
+                    child: MyQuillEditor(
+                      controller: _contentQuillController,
+                      isReadOnly: true,
+                    ),
+                  ),
           ],
         ),
       ),
