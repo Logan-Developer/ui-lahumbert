@@ -39,7 +39,8 @@ class _NotesListPageState extends State<NotesListPage> {
 
   Future<void> addNote(String noteName) async {
     setState(() {
-      notes.insert(0, {'name': noteName, 'lastUpdated': DateTime.now()});
+      notes.insert(
+          0, {'name': noteName, 'lastUpdated': DateTime.now().toString()});
     });
   }
 
@@ -50,7 +51,8 @@ class _NotesListPageState extends State<NotesListPage> {
 
   void editNote(String oldNoteName, String newNoteName) {
     setState(() {
-      final index = notes.indexOf(oldNoteName);
+      final index =
+          notes.indexWhere((element) => element['name'] == oldNoteName);
       notes[index]['name'] = newNoteName;
     });
     notes.sort((a, b) => b['lastUpdated'].compareTo(a['lastUpdated']));
@@ -135,7 +137,7 @@ class _NotesListPageState extends State<NotesListPage> {
                     itemCount: notes.length,
                     itemBuilder: (BuildContext context, int index) {
                       final String noteName = notes[index]['name'];
-                      final DateTime lastUpdated = notes[index]['lastUpdated'];
+                      final String lastUpdated = notes[index]['lastUpdated'];
                       if (searchValue.isNotEmpty &&
                           !noteName.contains(searchValue)) {
                         return const SizedBox.shrink();
@@ -158,10 +160,9 @@ class _NotesListPageState extends State<NotesListPage> {
                           child: Card(
                             child: Column(children: [
                               ListTile(
-                                title: Text(notes[index]['name']),
-                                subtitle: Text(
-                                    'Last changed on ${DateFormat('yyyy-MM-dd HH:mm').format(lastUpdated)}'),
-                              )
+                                  title: Text(notes[index]['name']),
+                                  subtitle: Text(
+                                      'Last changed on ${DateFormat('yyyy-MM-dd HH:mm').format(DateTime.parse(lastUpdated))}'))
                             ]),
                           ));
                     }))),

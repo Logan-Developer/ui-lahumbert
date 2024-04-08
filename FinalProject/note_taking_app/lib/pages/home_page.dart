@@ -38,21 +38,23 @@ class _HomePageState extends State<HomePage> {
 
   void addClass(String className) {
     setState(() {
-      classes.insert(0, {'name': className, 'lastUpdated': DateTime.now()});
+      classes.insert(
+          0, {'name': className, 'lastUpdated': DateTime.now().toString()});
     });
   }
 
   void editClass(String oldClassName, String newClassName) {
     setState(() {
-      final index = classes.indexOf(oldClassName);
-      classes[index] = newClassName;
+      final index =
+          classes.indexWhere((element) => element['name'] == oldClassName);
+      classes[index]['name'] = newClassName;
     });
     classes.sort((a, b) => b['lastUpdated'].compareTo(a['lastUpdated']));
   }
 
   void deleteClass(String className) {
     setState(() {
-      classes.remove(className);
+      classes.removeWhere((element) => element['name'] == className);
     });
   }
 
@@ -78,7 +80,7 @@ class _HomePageState extends State<HomePage> {
                       itemCount: classes.length,
                       itemBuilder: (BuildContext context, int index) {
                         final String className = classes[index]['name'];
-                        final DateTime lastUpdated =
+                        final String lastUpdated =
                             classes[index]['lastUpdated'];
                         if (searchValue.isNotEmpty &&
                             !className.contains(searchValue)) {
@@ -101,10 +103,9 @@ class _HomePageState extends State<HomePage> {
                             child: Card(
                                 child: Column(children: [
                               ListTile(
-                                title: Text(className),
-                                subtitle: Text(
-                                    'Last changed on ${DateFormat('yyyy-MM-dd HH:mm').format(lastUpdated)}'),
-                              ),
+                                  title: Text(className),
+                                  subtitle: Text(
+                                      'Last changed on ${DateFormat('yyyy-MM-dd HH:mm').format(DateTime.parse(lastUpdated))}')),
                             ])));
                       }))),
         ])),
