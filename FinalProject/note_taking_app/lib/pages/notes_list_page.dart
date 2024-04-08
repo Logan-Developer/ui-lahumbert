@@ -54,6 +54,7 @@ class _NotesListPageState extends State<NotesListPage> {
       final index =
           notes.indexWhere((element) => element['name'] == oldNoteName);
       notes[index]['name'] = newNoteName;
+      notes[index]['lastUpdated'] = DateTime.now().toString();
     });
     notes.sort((a, b) => b['lastUpdated'].compareTo(a['lastUpdated']));
   }

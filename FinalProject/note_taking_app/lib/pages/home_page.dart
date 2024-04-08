@@ -48,6 +48,7 @@ class _HomePageState extends State<HomePage> {
       final index =
           classes.indexWhere((element) => element['name'] == oldClassName);
       classes[index]['name'] = newClassName;
+      classes[index]['lastUpdated'] = DateTime.now().toString();
     });
     classes.sort((a, b) => b['lastUpdated'].compareTo(a['lastUpdated']));
   }

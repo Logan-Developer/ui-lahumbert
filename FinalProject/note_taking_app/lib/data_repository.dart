@@ -45,6 +45,9 @@ class DataRepository {
       'name': noteName,
       'content': content,
     });
+
+    await db.update('classes', {'lastUpdated': DateTime.now().toString()},
+        where: 'id = ?', whereArgs: [classID]);
   }
 
   Future<void> deleteClass(String className) async {
@@ -64,6 +67,9 @@ class DataRepository {
     final classID = classData[0]['id'] as int;
     await db.delete('notes',
         where: 'classID = ? AND name = ?', whereArgs: [classID, noteName]);
+
+    await db.update('classes', {'lastUpdated': DateTime.now().toString()},
+        where: 'id = ?', whereArgs: [classID]);
   }
 
   Future<void> updateClass(String oldClassName, String newClassName) async {
@@ -80,5 +86,8 @@ class DataRepository {
     final classID = classData[0]['id'] as int;
     await db.update('notes', {'name': newNoteName, 'content': content},
         where: 'classID = ? AND name = ?', whereArgs: [classID, oldNoteName]);
+
+    await db.update('classes', {'lastUpdated': DateTime.now().toString()},
+        where: 'id = ?', whereArgs: [classID]);
   }
 }
