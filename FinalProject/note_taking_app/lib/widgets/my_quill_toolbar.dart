@@ -31,14 +31,6 @@ class MyQuillToolbar extends StatelessWidget {
             QuillToolbarImageButton(
               controller: controller,
             ),
-            // hide camera button on web platform
-            if (!isWeb())
-              QuillToolbarCameraButton(
-                controller: controller,
-              ),
-            QuillToolbarVideoButton(
-              controller: controller,
-            )
           ],
         ),
       ),
