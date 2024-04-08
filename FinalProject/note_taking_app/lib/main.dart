@@ -19,7 +19,7 @@ class MyApp extends StatelessWidget {
   final _router = GoRouter(routes: [
     GoRoute(
       path: '/',
-      builder: (context, state) => const HomePage(title: 'My Note-Taking App'),
+      builder: (context, state) => const HomePage(title: 'Class Snap'),
     ),
     GoRoute(
         path: '/class/:className',
@@ -91,7 +91,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp.router(
-      title: 'My Note-Taking App',
+      title: 'Class Snap',
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
