@@ -51,14 +51,14 @@ class _NotesListPageState extends State<NotesListPage> {
   void editNote(String oldNoteName, String newNoteName) {
     setState(() {
       final index = notes.indexOf(oldNoteName);
-      notes[index] = newNoteName;
+      notes[index]['name'] = newNoteName;
     });
     notes.sort((a, b) => b['lastUpdated'].compareTo(a['lastUpdated']));
   }
 
   void deleteNote(String noteName) {
     setState(() {
-      notes.remove(noteName);
+      notes.removeWhere((element) => element['name'] == noteName);
     });
   }
 
@@ -158,7 +158,7 @@ class _NotesListPageState extends State<NotesListPage> {
                           child: Card(
                             child: Column(children: [
                               ListTile(
-                                title: Text(notes[index]),
+                                title: Text(notes[index]['name']),
                                 subtitle: Text(
                                     'Last changed on ${DateFormat('yyyy-MM-dd HH:mm').format(lastUpdated)}'),
                               )
