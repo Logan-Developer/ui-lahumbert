@@ -130,45 +130,63 @@ class _NotesListPageState extends State<NotesListPage> {
                   searchValue = value;
                 })),
         Expanded(
-            child: Container(
-                padding: const EdgeInsets.all(100),
-                child: ListView.separated(
-                    separatorBuilder: (BuildContext context, int index) =>
-                        const SizedBox(height: 10),
-                    itemCount: notes.length,
-                    itemBuilder: (BuildContext context, int index) {
-                      final String noteName = notes[index]['name'];
-                      final String lastUpdated = notes[index]['lastUpdated'];
-                      if (searchValue.isNotEmpty &&
-                          !noteName
-                              .toLowerCase()
-                              .contains(searchValue.toLowerCase())) {
-                        return const SizedBox.shrink();
-                      }
-                      return GestureDetector(
-                          onTap: () {
-                            context
-                                .push('/class/${widget.className}/$noteName')
-                                .then((value) {
-                              if (value is NoteDetailsExtra) {
-                                final extra = value;
-                                if (extra.type == ExtraType.delete) {
-                                  deleteNote(extra.noteName);
-                                } else if (extra.type == ExtraType.edit) {
-                                  editNote(extra.oldNoteName, extra.noteName);
-                                }
-                              }
-                            });
-                          },
-                          child: Card(
-                            child: Column(children: [
-                              ListTile(
-                                  title: Text(notes[index]['name']),
-                                  subtitle: Text(
-                                      'Last changed on ${DateFormat('yyyy-MM-dd HH:mm').format(DateTime.parse(lastUpdated))}'))
-                            ]),
-                          ));
-                    }))),
+            child: notes.isEmpty
+                ? Center(
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Image.asset('no_data.jpg', scale: 5),
+                        const SizedBox(height: 20),
+                        Text(
+                          'No notes yet',
+                          style: Theme.of(context).textTheme.titleLarge,
+                        ),
+                        const Text('Tap the + button to add a note'),
+                      ],
+                    ),
+                  )
+                : Container(
+                    padding: const EdgeInsets.all(100),
+                    child: ListView.separated(
+                        separatorBuilder: (BuildContext context, int index) =>
+                            const SizedBox(height: 10),
+                        itemCount: notes.length,
+                        itemBuilder: (BuildContext context, int index) {
+                          final String noteName = notes[index]['name'];
+                          final String lastUpdated =
+                              notes[index]['lastUpdated'];
+                          if (searchValue.isNotEmpty &&
+                              !noteName
+                                  .toLowerCase()
+                                  .contains(searchValue.toLowerCase())) {
+                            return const SizedBox.shrink();
+                          }
+                          return GestureDetector(
+                              onTap: () {
+                                context
+                                    .push(
+                                        '/class/${widget.className}/$noteName')
+                                    .then((value) {
+                                  if (value is NoteDetailsExtra) {
+                                    final extra = value;
+                                    if (extra.type == ExtraType.delete) {
+                                      deleteNote(extra.noteName);
+                                    } else if (extra.type == ExtraType.edit) {
+                                      editNote(
+                                          extra.oldNoteName, extra.noteName);
+                                    }
+                                  }
+                                });
+                              },
+                              child: Card(
+                                child: Column(children: [
+                                  ListTile(
+                                      title: Text(notes[index]['name']),
+                                      subtitle: Text(
+                                          'Last changed on ${DateFormat('yyyy-MM-dd HH:mm').format(DateTime.parse(lastUpdated))}'))
+                                ]),
+                              ));
+                        }))),
       ])),
       floatingActionButton: FloatingActionButton.extended(
         onPressed: () {

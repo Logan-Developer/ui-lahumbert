@@ -73,44 +73,61 @@ class _HomePageState extends State<HomePage> {
                     searchValue = value;
                   })),
           Expanded(
-              child: Container(
-                  padding: const EdgeInsets.all(100),
-                  child: ListView.separated(
-                      separatorBuilder: (BuildContext context, int index) =>
-                          const SizedBox(height: 10),
-                      itemCount: classes.length,
-                      itemBuilder: (BuildContext context, int index) {
-                        final String className = classes[index]['name'];
-                        final String lastUpdated =
-                            classes[index]['lastUpdated'];
-                        if (searchValue.isNotEmpty &&
-                            !className
-                                .toLowerCase()
-                                .contains(searchValue.toLowerCase())) {
-                          return const SizedBox.shrink();
-                        }
-                        return GestureDetector(
-                            onTap: () {
-                              context.push('/class/$className').then((value) {
-                                if (value is NoteListPageExtra) {
-                                  final extra = value;
-                                  if (extra.type == ExtraType.delete) {
-                                    deleteClass(extra.className);
-                                  } else if (extra.type == ExtraType.edit) {
-                                    editClass(
-                                        extra.oldClassName, extra.className);
-                                  }
-                                }
-                              }).then((value) => loadClasses());
-                            },
-                            child: Card(
-                                child: Column(children: [
-                              ListTile(
-                                  title: Text(className),
-                                  subtitle: Text(
-                                      'Last changed on ${DateFormat('yyyy-MM-dd HH:mm').format(DateTime.parse(lastUpdated))}')),
-                            ])));
-                      }))),
+              child: classes.isEmpty
+                  ? Center(
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Image.asset('no_data.jpg', scale: 5),
+                          const SizedBox(height: 20),
+                          Text(
+                            'No classes yet',
+                            style: Theme.of(context).textTheme.titleLarge,
+                          ),
+                          const Text('Tap the + button to add a class'),
+                        ],
+                      ),
+                    )
+                  : Container(
+                      padding: const EdgeInsets.all(100),
+                      child: ListView.separated(
+                          separatorBuilder: (BuildContext context, int index) =>
+                              const SizedBox(height: 10),
+                          itemCount: classes.length,
+                          itemBuilder: (BuildContext context, int index) {
+                            final String className = classes[index]['name'];
+                            final String lastUpdated =
+                                classes[index]['lastUpdated'];
+                            if (searchValue.isNotEmpty &&
+                                !className
+                                    .toLowerCase()
+                                    .contains(searchValue.toLowerCase())) {
+                              return const SizedBox.shrink();
+                            }
+                            return GestureDetector(
+                                onTap: () {
+                                  context
+                                      .push('/class/$className')
+                                      .then((value) {
+                                    if (value is NoteListPageExtra) {
+                                      final extra = value;
+                                      if (extra.type == ExtraType.delete) {
+                                        deleteClass(extra.className);
+                                      } else if (extra.type == ExtraType.edit) {
+                                        editClass(extra.oldClassName,
+                                            extra.className);
+                                      }
+                                    }
+                                  }).then((value) => loadClasses());
+                                },
+                                child: Card(
+                                    child: Column(children: [
+                                  ListTile(
+                                      title: Text(className),
+                                      subtitle: Text(
+                                          'Last changed on ${DateFormat('yyyy-MM-dd HH:mm').format(DateTime.parse(lastUpdated))}')),
+                                ])));
+                          }))),
         ])),
         floatingActionButton: FloatingActionButton.extended(
           onPressed: () {
