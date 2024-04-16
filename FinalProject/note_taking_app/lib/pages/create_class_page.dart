@@ -61,6 +61,11 @@ class _CreateClassPageState extends State<CreateClassPage> {
                       if (value.length > 20) {
                         return 'Class name must be less than 20 characters';
                       }
+                      // special characters are not allowed
+                      if (RegExp(r'[!@#<>?":_`~;[\]\\|=+)(*&^%0-9-]')
+                          .hasMatch(value)) {
+                        return 'Special characters are not allowed';
+                      }
                       return null;
                     },
                     controller: _controller,
