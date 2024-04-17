@@ -78,7 +78,8 @@ class _HomePageState extends State<HomePage> {
                       child: Column(
                         mainAxisSize: MainAxisSize.min,
                         children: [
-                          Image.asset('no_data.jpg', scale: 5),
+                          const Image(
+                              image: AssetImage('no_data.jpg'), height: 400),
                           const SizedBox(height: 20),
                           Text(
                             'No classes yet',
