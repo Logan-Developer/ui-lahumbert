@@ -4,3 +4,5 @@
 \beamer@sectionintoc {4}{Iterative Design}{6}{0}{4}
 \beamer@subsectionintoc {4}{1}{First cut}{6}{0}{4}
 \beamer@subsectionintoc {4}{2}{UI/UX tests}{7}{0}{4}
+\beamer@subsectionintoc {4}{3}{Demo}{8}{0}{4}
+\beamer@sectionintoc {5}{Conclusion}{9}{0}{5}

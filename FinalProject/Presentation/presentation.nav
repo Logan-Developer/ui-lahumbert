@@ -26,8 +26,21 @@
 \headcommand {\beamer@framepages {6}{6}}
 \headcommand {\beamer@subsectionpages {6}{6}}
 \headcommand {\beamer@subsectionentry {0}{4}{2}{7}{UI/UX tests}}
-\headcommand {\beamer@partpages {1}{7}}
+\headcommand {\slideentry {4}{2}{1}{7/7}{UI/UX tests}{0}}
+\headcommand {\beamer@framepages {7}{7}}
 \headcommand {\beamer@subsectionpages {7}{7}}
-\headcommand {\beamer@sectionpages {6}{7}}
-\headcommand {\beamer@documentpages {7}}
-\headcommand {\gdef \inserttotalframenumber {6}}
+\headcommand {\beamer@subsectionentry {0}{4}{3}{8}{Demo}}
+\headcommand {\slideentry {4}{3}{1}{8/8}{Demo}{0}}
+\headcommand {\beamer@framepages {8}{8}}
+\headcommand {\beamer@sectionpages {6}{8}}
+\headcommand {\beamer@subsectionpages {8}{8}}
+\headcommand {\sectionentry {5}{Conclusion}{9}{Conclusion}{0}}
+\headcommand {\slideentry {5}{0}{1}{9/9}{}{0}}
+\headcommand {\beamer@framepages {9}{9}}
+\headcommand {\slideentry {5}{0}{2}{10/10}{}{0}}
+\headcommand {\beamer@framepages {10}{10}}
+\headcommand {\beamer@partpages {1}{10}}
+\headcommand {\beamer@subsectionpages {9}{10}}
+\headcommand {\beamer@sectionpages {9}{10}}
+\headcommand {\beamer@documentpages {10}}
+\headcommand {\gdef \inserttotalframenumber {10}}
