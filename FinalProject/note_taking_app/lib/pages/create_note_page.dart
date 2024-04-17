@@ -87,10 +87,9 @@ class _CreateNotePageState extends State<CreateNotePage> {
                       if (value.length > 20) {
                         return 'Note name must be less than 20 characters';
                       }
-                      // special characters are not allowed
-                      if (RegExp(r'[!@#<>?":_`~;[\]\\|=+)(*&^%0-9-]')
-                          .hasMatch(value)) {
-                        return 'Special characters are not allowed';
+                      // '/' not allowed in note name
+                      if (value.contains('/')) {
+                        return 'Note name contains invalid character';
                       }
                       return null;
                     },
