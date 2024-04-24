@@ -27,12 +27,16 @@ class MyQuillToolbar extends StatelessWidget {
               controller: controller,
             ),
             const VerticalDivider(),
+            QuillToolbarIndentButton(controller: controller, isIncrease: false),
+            QuillToolbarIndentButton(controller: controller, isIncrease: true),
+            const VerticalDivider(),
             QuillToolbarToggleStyleButton(
                 controller: controller, attribute: Attribute.bold),
             QuillToolbarToggleStyleButton(
                 controller: controller, attribute: Attribute.italic),
             QuillToolbarToggleStyleButton(
                 controller: controller, attribute: Attribute.underline),
+            QuillToolbarClearFormatButton(controller: controller),
             const VerticalDivider(),
             QuillToolbarColorButton(
               controller: controller,
@@ -43,9 +47,10 @@ class MyQuillToolbar extends StatelessWidget {
               isBackground: true,
             ),
             const VerticalDivider(),
-            QuillToolbarImageButton(
-              controller: controller,
-            ),
+            QuillToolbarImageButton(controller: controller),
+            QuillToolbarLinkStyleButton(controller: controller),
+            const VerticalDivider(),
+            QuillToolbarSearchButton(controller: controller),
           ],
         ),
       ),
