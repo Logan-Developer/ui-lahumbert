@@ -21,26 +21,30 @@
 \headcommand {\beamer@subsectionpages {5}{5}}
 \headcommand {\sectionentry {4}{Iterative Design}{6}{Iterative Design}{0}}
 \headcommand {\beamer@subsectionpages {6}{5}}
-\headcommand {\beamer@subsectionentry {0}{4}{1}{6}{First cut}}
-\headcommand {\slideentry {4}{1}{1}{6/6}{First cut}{0}}
+\headcommand {\beamer@subsectionentry {0}{4}{1}{6}{Designing/Prototyping}}
+\headcommand {\slideentry {4}{1}{1}{6/6}{Designing/Prototyping}{0}}
 \headcommand {\beamer@framepages {6}{6}}
 \headcommand {\beamer@subsectionpages {6}{6}}
-\headcommand {\beamer@subsectionentry {0}{4}{2}{7}{UI/UX tests}}
-\headcommand {\slideentry {4}{2}{1}{7/7}{UI/UX tests}{0}}
+\headcommand {\beamer@subsectionentry {0}{4}{2}{7}{Developing}}
+\headcommand {\slideentry {4}{2}{1}{7/7}{Developing}{0}}
 \headcommand {\beamer@framepages {7}{7}}
 \headcommand {\beamer@subsectionpages {7}{7}}
-\headcommand {\beamer@subsectionentry {0}{4}{3}{8}{Demo}}
-\headcommand {\slideentry {4}{3}{1}{8/8}{Demo}{0}}
+\headcommand {\beamer@subsectionentry {0}{4}{3}{8}{UI/UX tests}}
+\headcommand {\slideentry {4}{3}{1}{8/8}{UI/UX tests}{0}}
 \headcommand {\beamer@framepages {8}{8}}
-\headcommand {\beamer@sectionpages {6}{8}}
 \headcommand {\beamer@subsectionpages {8}{8}}
-\headcommand {\sectionentry {5}{Conclusion}{9}{Conclusion}{0}}
-\headcommand {\slideentry {5}{0}{1}{9/9}{}{0}}
+\headcommand {\beamer@subsectionentry {0}{4}{4}{9}{Demo}}
+\headcommand {\slideentry {4}{4}{1}{9/9}{Demo}{0}}
 \headcommand {\beamer@framepages {9}{9}}
-\headcommand {\slideentry {5}{0}{2}{10/10}{}{0}}
+\headcommand {\beamer@sectionpages {6}{9}}
+\headcommand {\beamer@subsectionpages {9}{9}}
+\headcommand {\sectionentry {5}{Conclusion}{10}{Conclusion}{0}}
+\headcommand {\slideentry {5}{0}{1}{10/10}{}{0}}
 \headcommand {\beamer@framepages {10}{10}}
-\headcommand {\beamer@partpages {1}{10}}
-\headcommand {\beamer@subsectionpages {9}{10}}
-\headcommand {\beamer@sectionpages {9}{10}}
-\headcommand {\beamer@documentpages {10}}
-\headcommand {\gdef \inserttotalframenumber {10}}
+\headcommand {\slideentry {5}{0}{2}{11/11}{}{0}}
+\headcommand {\beamer@framepages {11}{11}}
+\headcommand {\beamer@partpages {1}{11}}
+\headcommand {\beamer@subsectionpages {10}{11}}
+\headcommand {\beamer@sectionpages {10}{11}}
+\headcommand {\beamer@documentpages {11}}
+\headcommand {\gdef \inserttotalframenumber {11}}
