@@ -1,16 +1,29 @@
 # Class Snap
 
-A new Flutter project.
+Note-taking application to help students taking notes easily and clickly.
 
-## Getting Started
+## Requirements
 
-This project is a starting point for a Flutter application.
+This application has been created with Flutter. In order to compile it, please follow the [installation instructions](https://docs.flutter.dev/get-started/install) for your development platform.
 
-A few resources to get you started if this is your first Flutter project:
+## How to run the app?
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+You can run a debug version of the app with the following command:
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+```bash
+    flutter run
+```
+
+If your app can be built for multiple platforms, a prompt will allow you to choose the one you want.
+
+## How to build the app in release mode?
+
+You can build a release version of the app by running the following command:
+
+```bash
+    flutter build [platform]
+```
+
+where platform is the platform you want to build your app for (e.g web, apk)
+
+You will then be able to retrieve the compiled app in the subfolder build/name of the platform you chose.
