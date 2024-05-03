@@ -141,14 +141,50 @@
 	The only cons of it is that it we cannot serve a nodeJS, apache or nginx server for example with this service.\linebreak
 	As Flutter apps are don't require any of these, Github pages is a good choice.\linebreak
 	
-	You can access the latest public version of my app \href{https://class-snap.tech/}{here.}
+	The latest public version of my app is available \href{https://class-snap.tech/}{here.}
 	
 	\pagebreak
 	
 	\subsection{UI/UX tests}
 	
 	After developing and publishing my app I decided to do UI/UX tests.\linebreak
-	For this, I asked other students who were potential future users of my app to try it and give me feedbacks 
+	For this, I asked other students, who were potential future users of my app to try it and give me feedback on the things they liked/disliked about the app, and reports of bugs.\linebreak
+	
+	Thanks to this useful information, I have been for example able to improve both the view that lists classes and the view that lists notes in a class.
+	
+	\begin{figure}[!htb]
+		\centering
+		\includegraphics[scale=0.4]{ui_improve_class_list}
+		\caption{Home page with empty list of classes}
+	\end{figure}
+	
+	The graphics and text on the screenshot above displayed whenever no class has been created yet, were not present at first.\linebreak
+	Therefor, some users did not know what to do and did not necessarily see the "Add Class" button in the lower right corner of the page.\linebreak
+	Running UI/UX tests helped me being aware of the issue and addressing it.
+	
+	\pagebreak
+	
+	If these tests helped me improving some aspects of the app, they also helped me detecting bugs I did not noticed while I was developing the app and fixing them.\linebreak
+	
+	For example, if we named a class or a note with a '/' in it and we tried to access it, the application threw an error. This is because this special character is used in the routes leading to a class or a note, so the route was invalid in this specific case.
+	
+	\pagebreak
+	
+	\section{Conclusion}
+	
+	The development of this note-taking application employed an iterative design approach to create a user-friendly tool for students.\linebreak
+	
+	From initial paper sketches to Figma prototyping and ultimately a Flutter-based web application and then UI/UX tests, this project has let me exploring different important aspects of the creation of applications.\linebreak
+	
+	I have been able to respect the different requirements I have set for the app and to implement the different features features I wanted to have at first.\linebreak
+	
+	Future development could explore additional features like:
+	
+	\begin{itemize}
+		\item Add more useful features such as the possibility of adding hand-drawn notes
+		\item Add cloud storage support (for example via Firebase which has a great compatibility with Flutter)
+		\item Add support for exporting notes such as pdf or word document
+	\end{itemize}
 	
 	\pagebreak
 	
