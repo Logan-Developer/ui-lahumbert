@@ -1,7 +1,10 @@
 \contentsline {section}{\numberline {1}Description of the application}{3}{section.1}%
 \contentsline {section}{\numberline {2}Requirements}{3}{section.2}%
 \contentsline {section}{\numberline {3}Features}{3}{section.3}%
-\contentsline {section}{\numberline {4}Design}{4}{section.4}%
+\contentsline {section}{\numberline {4}Iterative design}{4}{section.4}%
 \contentsline {subsection}{\numberline {4.1}Sketches on paper}{4}{subsection.4.1}%
-\contentsline {subsection}{\numberline {4.2}Prototyping on Figma}{5}{subsection.4.2}%
-\contentsline {section}{\numberline {5}Links}{7}{section.5}%
+\contentsline {subsection}{\numberline {4.2}Designing and prototyping on Figma}{5}{subsection.4.2}%
+\contentsline {subsection}{\numberline {4.3}Development with Flutter}{7}{subsection.4.3}%
+\contentsline {subsection}{\numberline {4.4}Publishing the app}{7}{subsection.4.4}%
+\contentsline {subsection}{\numberline {4.5}UI/UX tests}{8}{subsection.4.5}%
+\contentsline {section}{\numberline {5}Links}{9}{section.5}%

@@ -10,7 +10,7 @@
 }
 
 %opening
-\title{CSCI 470 - Note-taking application requirements}
+\title{CSCI 337 - Note-taking app - Final Report}
 \author{Logan Humbert}
 
 \begin{document}
@@ -60,7 +60,7 @@
 	
 	\pagebreak
 	
-	\section{Design}
+	\section{Iterative design}
 	
 	\subsection{Sketches on paper}
 	
@@ -86,11 +86,13 @@
 	
 	\pagebreak
 	
-	\subsection{Prototyping on Figma}
+	\subsection{Designing and prototyping on Figma}
 	
 	After drawing my first sketches on paper, I started making a more accurate and clean design of the UI on Figma, and I used its prototyping features to create the transitions between the pages of the app.
 	
-	As Flutter uses the Google Material's design, I used their official figma template, which contains reusable Material component, so my Figma design could be as close as possible as the UI the final app will have.
+	For developing my app I decided to use Flutter, as I will explain more in details in the next section.
+	As this framework uses the Google Material's design, I used their official figma template, which contains reusable Material component, so my Figma design could be as close as possible as the UI the final app will have.
+	
 	
 	You can access my figma design \href{https://www.figma.com/file/ZOlxVGHb9fLdk5uUODqMU9/CSCI-337---Notes-Taking-App?type=design&node-id=54810%3A34721&mode=design&t=fS6KJvRgsvtgz9cf-1}{here}.
 	
@@ -114,8 +116,39 @@
 		\caption{All user stories on Figma}
 	\end{figure}
 	
-	Some pages of the app have been duplicated, as they simulate a change in database, or they display an additional graphical element, such as a dialog box.
+	Some pages of the app have been duplicated, as they simulate a change in database, or they display an additional graphical element, such as a dialog box, which is not possible to achieve directly on Figma.\linebreak
 	These are used to obtain a better experience when we execute the prototype on figma.
+	
+	\pagebreak
+	
+	\subsection{Development with Flutter}
+	
+	After obtaining a first satisfying design and prototyping my app on figma, I started to develop my app.\linebreak
+	
+	I decided to use Flutter, which is an open-source framework created and maintained by Google.
+	Its main advantage is that it allows building natively compiled multi-platform applications from a single codebase.\linebreak
+	
+	I focused mainly on making a web version as it is one of the easiest versions to debug, and it would allow my app to be available on any platform that has a web browser, such as windows and mac computers, Android and IOS phones and tablets.\linebreak
+	
+	Anyway, it would be very easy to build a native Android or IOS app for example, with none or just a few modifications of the code needed.\linebreak
+	
+	The source code and the instructions to build and run the Flutter app are available \href{https://github.com/Logan-Developer/ui-lahumbert/tree/main/FinalProject/note_taking_app}{here.}
+	
+	\subsection{Publishing the app}
+	
+	After judging that my app was complete and stable enough I decided to publish it.\linebreak
+	For this I used a service named Github pages, that allows any Github repository to be accessed as a website.\linebreak
+	The only cons of it is that it we cannot serve a nodeJS, apache or nginx server for example with this service.\linebreak
+	As Flutter apps are don't require any of these, Github pages is a good choice.\linebreak
+	
+	You can access the latest public version of my app \href{https://class-snap.tech/}{here.}
+	
+	\pagebreak
+	
+	\subsection{UI/UX tests}
+	
+	After developing and publishing my app I decided to do UI/UX tests.\linebreak
+	For this, I asked other students who were potential future users of my app to try it and give me feedbacks 
 	
 	\pagebreak
 	
@@ -127,6 +160,9 @@
 		\item \href{https://github.com/Logan-Developer/ui-lahumbert/tree/main/FinalProject}{Project's repository} 
 		
 		\item \href{https://www.figma.com/file/ZOlxVGHb9fLdk5uUODqMU9/CSCI-337---Notes-Taking-App?type=design&node-id=54810%3A34721&mode=design&t=fS6KJvRgsvtgz9cf-1}{Figma Design}
+		
+		\item
+		\href{https://class-snap.tech/}{Web version of the app}
 	\end{itemize}
 	
 	\label{LastPage}
