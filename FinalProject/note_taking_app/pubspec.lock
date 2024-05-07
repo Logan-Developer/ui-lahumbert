@@ -281,14 +281,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.4.1"
-  dio:
-    dependency: transitive
-    description:
-      name: dio
-      sha256: "11e40df547d418cc0c4900a9318b26304e665da6fa4755399a9ff9efd09034b5"
-      url: "https://pub.dev"
-    source: hosted
-    version: "5.4.3+1"
   embed:
     dependency: "direct main"
     description:
@@ -337,14 +329,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "7.0.0"
-  file_saver:
-    dependency: "direct main"
-    description:
-      name: file_saver
-      sha256: bdebc720e17b3e01aba59da69b6d47020a7e5ba7d5c75bd9194f9618d5f16ef4
-      url: "https://pub.dev"
-    source: hosted
-    version: "0.2.12"
   file_selector_linux:
     dependency: transitive
     description:
@@ -438,14 +422,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.0.3"
-  flutter_html_to_pdf:
-    dependency: "direct main"
-    description:
-      name: flutter_html_to_pdf
-      sha256: "4bec44685f62a404bac7c9e412da0fbcd389ea5eceb397c268d829ecfa148c34"
-      url: "https://pub.dev"
-    source: hosted
-    version: "0.7.0"
   flutter_inappwebview:
     dependency: transitive
     description:
@@ -950,7 +926,7 @@ packages:
     source: hosted
     version: "2.2.1"
   pdf:
-    dependency: "direct main"
+    dependency: transitive
     description:
       name: pdf
       sha256: "243f05342fc0bdf140eba5b069398985cdbdd3dbb1d776cf43d5ea29cc570ba6"
@@ -1042,14 +1018,6 @@ packages:
     description:
       name: quill_html_converter
       sha256: "130056ea4fec9a728d20bfd6e9ea97ef4413069cb3814366b915eece67b5d605"
-      url: "https://pub.dev"
-    source: hosted
-    version: "9.3.10"
-  quill_pdf_converter:
-    dependency: "direct main"
-    description:
-      name: quill_pdf_converter
-      sha256: "2119b84d6b994f2aae87c0533f7de7c50a6c365c47b00bad1059e214e3c4893a"
       url: "https://pub.dev"
     source: hosted
     version: "9.3.10"
@@ -1194,22 +1162,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.8.12"
-  syncfusion_flutter_core:
-    dependency: transitive
-    description:
-      name: syncfusion_flutter_core
-      sha256: fc61878342caee6da7979ca0ca9bb178f1eb5ca9b836dada34b83caa39e4bfed
-      url: "https://pub.dev"
-    source: hosted
-    version: "25.1.42"
-  syncfusion_flutter_pdf:
-    dependency: "direct main"
-    description:
-      name: syncfusion_flutter_pdf
-      sha256: "4fb7d57378975909e67c4cabb3344b5d701e75db6f988d44dc203592e39c8c7b"
-      url: "https://pub.dev"
-    source: hosted
-    version: "25.1.42"
   synchronized:
     dependency: transitive
     description:
