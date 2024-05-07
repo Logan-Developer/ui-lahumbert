@@ -7,5 +7,8 @@
 \contentsline {subsection}{\numberline {4.3}Development with Flutter}{7}{subsection.4.3}%
 \contentsline {subsection}{\numberline {4.4}Publishing the app}{7}{subsection.4.4}%
 \contentsline {subsection}{\numberline {4.5}UI/UX tests}{8}{subsection.4.5}%
-\contentsline {section}{\numberline {5}Conclusion}{10}{section.5}%
-\contentsline {section}{\numberline {6}Links}{11}{section.6}%
+\contentsline {section}{\numberline {5}App improvements}{9}{section.5}%
+\contentsline {subsection}{\numberline {5.1}Export as pdf}{9}{subsection.5.1}%
+\contentsline {subsection}{\numberline {5.2}Cloud Storage}{10}{subsection.5.2}%
+\contentsline {section}{\numberline {6}Conclusion}{12}{section.6}%
+\contentsline {section}{\numberline {7}Links}{13}{section.7}%

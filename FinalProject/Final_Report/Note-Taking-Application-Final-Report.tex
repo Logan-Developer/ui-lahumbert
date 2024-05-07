@@ -168,6 +168,60 @@
 	
 	For example, if we named a class or a note with a '/' in it and we tried to access it, the application threw an error. This is because this special character is used in the routes leading to a class or a note, so the route was invalid in this specific case.
 	
+	\section{App improvements}
+	
+	After obtaining a first working version of my app, completed by UI/UX tests, I decided to work on new improvements for it.
+	
+	\subsection{Export as pdf}
+	
+	One major feature absent from the app is the possibility to export the notes.
+	I decided to implement a pdf export feature to begin with.\linebreak
+	
+	I use the flutter\_quill library to make the notes editor and its toolbar.
+	Officially, this library only supports exporting the text as html or raw text.
+	To be able to export my notes as pdf, I explored two possibilities:
+	
+	\begin{itemize}
+		\item Find a library that is directly able to convert the content of the text editor into a pdf.
+		\item Find a library that can convert html into pdf.
+	\end{itemize}
+	
+	I started with the first option I had in mind. I found some libraries made for flutter\_quill able to directly export the text from the editor to a pdf file, but they were either deprecated and incompatible with newer version of flutter\_quill, or were only compatible with Android, not with the web version of the app.\linebreak
+	
+	After multiple fails, I decided to try the second option. It is easy to export a note as html using the tools made available by flutter\_quill. Thanks to the library htmltopdfwidgets I have been able to take this html text as input to create a pdf files.\linebreak
+	
+	Then, on the web I create a base64 url to download the file, and on Android and IOS, I write the file as binary in the external storage.
+	
+	\begin{figure}[!htb]
+		\centering
+		\includegraphics[scale=0.4]{pdf_export}
+		\caption{Example of note exported as pdf}
+	\end{figure}
+	
+	\pagebreak
+	
+	\subsection{Cloud Storage}
+	
+	After adding support for exporting notes as pdf, I started thinking about adding support for cloud storage.\linebreak
+	
+	On Figma, I created a new user story representing the pages shown to the user the first time he opens the app. He can login/register to an account (email/passord, Google, Twitter, Apple, ...) or skip the process to use the app without any account.
+	
+	\begin{figure}[!htb]
+		\centering
+		\includegraphics[scale=0.4]{figma_first_app_opening}
+		\caption{User story "First app opening" on Figma}
+	\end{figure}
+	
+	\pagebreak
+	
+	Then I created a second user story representing the connection to an account from the home screen of the app, using a new button placed on the top app bar.
+	
+	\begin{figure}[!htb]
+		\centering
+		\includegraphics[scale=0.4]{figma_connect_account}
+		\caption{User story "Connect to an account" on Figma}
+	\end{figure}
+	
 	\pagebreak
 	
 	\section{Conclusion}
@@ -183,7 +237,7 @@
 	\begin{itemize}
 		\item Add more useful features such as the possibility of adding hand-drawn notes
 		\item Add cloud storage support (for example via Firebase which has a great compatibility with Flutter)
-		\item Add support for exporting notes such as pdf or word document
+		\item Add support for exporting notes as word documents
 	\end{itemize}
 	
 	\pagebreak
