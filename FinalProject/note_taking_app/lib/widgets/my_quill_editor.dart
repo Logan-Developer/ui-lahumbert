@@ -25,7 +25,7 @@ class MyQuillEditor extends StatelessWidget {
   Widget build(BuildContext context) {
     return QuillEditor.basic(
       configurations: QuillEditorConfigurations(
-        readOnly: isReadOnly ?? false,
+        checkBoxReadOnly: isReadOnly ?? false,
         controller: controller,
         elementOptions: const QuillEditorElementOptions(
           codeBlock: QuillEditorCodeBlockElementOptions(

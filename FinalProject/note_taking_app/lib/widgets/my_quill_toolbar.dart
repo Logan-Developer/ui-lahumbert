@@ -1,45 +1,54 @@
-import 'package:file_saver/file_saver.dart';
+import 'dart:convert';
+import 'dart:html' as htmllib;
+import 'dart:io';
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_quill/flutter_quill.dart';
-import 'package:flutter_quill_extensions/flutter_quill_extensions.dart';
-import 'package:quill_pdf_converter/quill_pdf_converter.dart';
-import 'package:screenshot/screenshot.dart';
-import 'package:pdf/widgets.dart' as pw;
+import 'package:flutter_quill_extensions/embeds/image/toolbar/image_button.dart';
+import 'package:htmltopdfwidgets/htmltopdfwidgets.dart' as htmltopdf;
+import 'package:path_provider/path_provider.dart';
+import 'package:quill_html_converter/quill_html_converter.dart';
 
 import 'my_quill_custom_toolbar_buttons.dart';
 
 class MyQuillToolbar extends StatelessWidget {
-  MyQuillToolbar({
+  const MyQuillToolbar({
     required this.controller,
     super.key,
   });
 
   final QuillController controller;
-  final ScreenshotController screenshotController = ScreenshotController();
 
-  // 2. Render a widget as an image
-  Future<Uint8List> _takeWidgetScreenshot(Widget widget) async {
-    return await screenshotController.captureFromWidget(widget);
-  }
-
-// 3. Generate the PDF
   Future<void> _generatePdf() async {
-    final pdfDoc = pw.Document();
+    // Create a PDF document.
+    final html = controller.document.toDelta().toHtml();
 
-    final pdfFile = await controller.document.toDelta().toPdf();
-
-    for (final widget in pdfFile) {
-      final image =
-          pw.MemoryImage(await _takeWidgetScreenshot(widget as Widget));
-      pdfDoc.addPage(pw.Page(build: (pw.Context context) => pw.Image(image)));
-    }
-
-    await FileSaver.instance.saveFile(
-      name: 'note.pdf',
-      bytes: await pdfDoc.save(),
-      mimeType: MimeType.pdf,
+    final newpdf = htmltopdf.Document();
+    final List<htmltopdf.Widget> widgets = await htmltopdf.HTMLToPdf().convert(
+      html,
     );
+
+    newpdf.addPage(htmltopdf.MultiPage(build: (context) {
+      return widgets;
+    }));
+
+    // Save the document
+    List<int> bytes = await newpdf.save();
+
+    if (kIsWeb) {
+      // Dispose the document
+      htmllib.AnchorElement(
+          href:
+              "data:application/octet-stream;charset=utf-16le;base64,${base64.encode(bytes)}")
+        ..setAttribute("download", "output.pdf")
+        ..click();
+    } else if (Platform.isAndroid || Platform.isIOS) {
+      // Save the document to the device
+      final directory = await getExternalStorageDirectory();
+      final file = File('${directory!.path}/output.pdf');
+      await file.writeAsBytes(bytes);
+    }
   }
 
   @override
